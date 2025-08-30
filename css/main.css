@@ -1,0 +1,489 @@
+/* Classic 90s Styling */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    background: #000000;
+    color: #00FF00;
+    overflow-x: hidden;
+}
+
+/* Fullscreen Container */
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+/* Dial-up Connection Screen */
+#dialup-screen {
+    background: linear-gradient(45deg, #000080, #008080, #000080);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.dialup-container {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.retro-title {
+    font-size: 2.5em;
+    color: #FFFF00;
+    text-shadow: 3px 3px 0px #FF00FF, 6px 6px 0px #00FFFF;
+    margin-bottom: 30px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Terminal Window */
+.terminal-window {
+    background: #C0C0C0;
+    border: 2px outset #C0C0C0;
+    border-radius: 0;
+    margin: 20px 0;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #000080, #0000FF);
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-content {
+    background: #000000;
+    color: #00FF00;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    min-height: 150px;
+}
+
+#connection-log {
+    margin-bottom: 20px;
+}
+
+.log-line {
+    margin: 5px 0;
+    opacity: 0;
+    animation: typewriter 0.5s ease-out forwards;
+}
+
+@keyframes typewriter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #404040;
+    border: 1px inset #C0C0C0;
+    position: relative;
+}
+
+#progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00FF00, #FFFF00, #00FF00);
+    background-size: 200% 100%;
+    animation: progressGlow 1s linear infinite;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+@keyframes progressGlow {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+#progress-text {
+    color: #FFFF00;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Modem Display */
+.modem-display {
+    background: #404040;
+    border: 2px inset #C0C0C0;
+    padding: 15px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modem-lights {
+    display: flex;
+    gap: 10px;
+}
+
+.light {
+    display: inline-block;
+    padding: 5px 8px;
+    background: #800000;
+    color: #FF0000;
+    border: 1px solid #400000;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+.light.active {
+    background: #008000;
+    color: #00FF00;
+    border-color: #004000;
+    box-shadow: 0 0 10px #00FF00;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+.speed-display {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: #00FFFF;
+}
+
+/* Retro Button */
+.retro-button {
+    background: linear-gradient(45deg, #FF00FF, #FFFF00, #00FFFF);
+    background-size: 300% 300%;
+    animation: rainbowShift 3s ease-in-out infinite;
+    border: 3px outset #C0C0C0;
+    color: #000000;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+}
+
+@keyframes rainbowShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.retro-button:hover {
+    animation-duration: 0.5s;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.7);
+}
+
+.retro-button:active {
+    border: 3px inset #C0C0C0;
+    transform: translateY(0px);
+}
+
+/* Blinking Text Effect */
+.blink {
+    animation: blink-text 1s infinite;
+}
+
+@keyframes blink-text {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Marquee Alternative */
+.marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translate3d(100%, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .retro-title {
+        font-size: 2em;
+    }
+    
+    .dialup-container {
+        padding: 10px;
+        max-width: 90%;
+    }
+    
+    .modem-display {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* 90s Website Styles */
+#main-content {
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    background: #FFFFFF;
+}
+
+/* Table-based layout styling */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td {
+    vertical-align: top;
+}
+
+/* Links styling */
+a {
+    color: #0000FF;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #800080;
+}
+
+a:hover {
+    color: #FF0000;
+    background-color: #FFFF00;
+}
+
+/* Music button */
+.music-btn {
+    background: linear-gradient(45deg, #FF00FF, #FFFF00);
+    border: 2px outset #C0C0C0;
+    padding: 5px 10px;
+    font-size: 10px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+/* Virtual Pet Styles */
+.pet-container {
+    border: 2px inset #C0C0C0;
+    background: #E0E0E0;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+#mini-pet {
+    font-size: 24px;
+    animation: petBounce 2s ease-in-out infinite;
+}
+
+@keyframes petBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.pet-status {
+    font-size: 8px;
+    color: #008000;
+    margin: 5px 0;
+}
+
+.pet-btn {
+    background: #FFB6C1;
+    border: 1px outset #FFB6C1;
+    padding: 3px 6px;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+/* Time Machine Slider */
+.time-slider-container {
+    background: #C0C0C0;
+    border: 2px inset #C0C0C0;
+    padding: 15px;
+    margin: 20px;
+    text-align: center;
+}
+
+.time-slider {
+    width: 200px;
+    margin: 10px 0;
+    appearance: none;
+    height: 20px;
+    background: linear-gradient(90deg, #FF0000, #FFFF00, #00FF00);
+    outline: none;
+    border: 2px inset #C0C0C0;
+}
+
+.time-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #0000FF;
+    border: 2px outset #C0C0C0;
+    cursor: pointer;
+}
+
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#current-year {
+    margin-top: 10px;
+    color: #FF00FF;
+    font-weight: bold;
+}
+
+/* Y2K Countdown */
+.countdown-display {
+    background: #000000;
+    color: #00FF00;
+    border: 3px inset #C0C0C0;
+    padding: 15px;
+    margin: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+#countdown-timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    animation: countdownGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes countdownGlow {
+    from { text-shadow: 0 0 5px #00FF00; }
+    to { text-shadow: 0 0 20px #00FF00, 0 0 30px #00FF00; }
+}
+
+.countdown-warning {
+    font-size: 12px;
+    color: #FFFF00;
+    animation: blink 1s infinite;
+}
+
+/* Retro GIF placeholders */
+img[alt="dancing baby"], img[alt="under construction"] {
+    background: repeating-linear-gradient(
+        45deg,
+        #FF00FF,
+        #FF00FF 10px,
+        #FFFF00 10px,
+        #FFFF00 20px
+    );
+    border: 2px dashed #000000;
+    display: inline-block;
+    text-align: center;
+    line-height: 80px;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Sparkle animation for random effects */
+@keyframes sparkleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(0);
+    }
+}
+
+/* Screen glitch effect */
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+.glitch {
+    animation: glitch 0.3s ease-in-out;
+}
+
+/* Banner styles */
+.banner {
+    background: linear-gradient(90deg, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000);
+    background-size: 200% 100%;
+    animation: rainbowBanner 3s linear infinite;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+@keyframes rainbowBanner {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* Retro form elements */
+input, textarea, select {
+    border: 2px inset #C0C0C0;
+    background: #FFFFFF;
+    font-family: 'Times New Roman', serif;
+    padding: 2px;
+}
+
+button {
+    border: 2px outset #C0C0C0;
+    background: #C0C0C0;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:active {
+    border: 2px inset #C0C0C0;
+}

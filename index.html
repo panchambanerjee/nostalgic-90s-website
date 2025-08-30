@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to CyberSpace 1999 - Connecting to the Information Superhighway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/gifs.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body bgcolor="#000000" text="#00FF00" link="#00FFFF" vlink="#FF00FF" alink="#FFFF00">
+    
+    <!-- Dial-up Connection Screen -->
+    <div id="dialup-screen" class="fullscreen">
+        <div class="dialup-container">
+            <h1 class="retro-title">🌐 CyberSpace Connection Manager v2.1 🌐</h1>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span>● ● ●</span>
+                    <span>Dial-Up Networking</span>
+                </div>
+                <div class="terminal-content">
+                    <div id="connection-log">
+                        <div class="log-line">Initializing modem...</div>
+                        <div class="log-line">Dialing 555-CYBER...</div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill"></div>
+                        </div>
+                        <div id="progress-text">Connecting... 0%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modem-display">
+                <div class="modem-lights">
+                    <span class="light" id="power-light">PWR</span>
+                    <span class="light" id="data-light">DATA</span>
+                    <span class="light" id="conn-light">CONN</span>
+                </div>
+                <div class="speed-display">
+                    <span id="connection-speed">28.8k</span>
+                </div>
+            </div>
+            
+            <button id="connect-btn" class="retro-button">CONNECT TO CYBERSPACE</button>
+        </div>
+    </div>
+    
+    <!-- Main Website Content (Hidden initially) -->
+    <div id="main-content" style="display: none;">
+        <!-- Top Navigation Frame -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#008080">
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="5">
+                        <tr>
+                            <td bgcolor="#FFFF00">
+                                <font face="Comic Sans MS" size="4" color="#FF00FF">
+                                    <b>🌟 Welcome to CyberKid1999's Totally Rad Homepage! 🌟</b>
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Main Content Table Layout -->
+        <table width="100%" border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <!-- Left Navigation Frame -->
+                <td width="200" bgcolor="#C0C0C0" valign="top">
+                    <table width="100%" cellpadding="10">
+                        <tr>
+                            <td>
+                                <font face="Arial" size="2">
+                                    <b>🔗 Navigation 🔗</b><br><br>
+                                    <a href="#home">🏠 Home</a><br>
+                                    <a href="#about">👤 About Me</a><br>
+                                    <a href="#photos">📷 Photos</a><br>
+                                    <a href="#links">🌐 Cool Links</a><br>
+                                    <a href="#guestbook">📖 Guestbook</a><br>
+                                    <a href="#downloads">💾 Downloads</a><br>
+                                    <a href="#chat">💬 Chat Room</a><br><br>
+                                    
+                                    <!-- Hit Counter -->
+                                    <center>
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="50" height="20" alt="counter">
+                                        <br><font size="1">You are visitor #<span id="hit-counter">0</span></font>
+                                    </center><br>
+                                    
+                                    <!-- Music Toggle -->
+                                    <center>
+                                        <button onclick="window.nostalgicSite.toggleMusic()" class="music-btn">
+                                            🎵 Toggle Music 🎵
+                                        </button>
+                                    </center><br>
+                                    
+                                    <!-- Virtual Pet Preview -->
+                                    <center>
+                                        <div class="pet-container">
+                                            <div id="mini-pet">🐣</div>
+                                            <div class="pet-status">Cyber Pet</div>
+                                            <button onclick="openPetWindow()" class="pet-btn">Care for Me!</button>
+                                        </div>
+                                    </center>
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
+                <!-- Main Content Area -->
+                <td bgcolor="#FFFFFF" valign="top">
+                    <table width="100%" cellpadding="20">
+                        <tr>
+                            <td>
+                                <!-- Marquee Welcome -->
+                                <div class="marquee">
+                                    <span class="rainbow-text" style="font-size: 18px;">
+                                        🌟 WELCOME TO THE INFORMATION SUPERHIGHWAY! 🌟 Check out my awesome homepage! 🚀 Don't forget to sign my guestbook! 📝 
+                                    </span>
+                                </div>
+                                
+                                <div class="rainbow-divider"></div>
+                                
+                                <center>
+                                    <h1><font color="#0000FF" face="Comic Sans MS">Welcome to CyberSpace!</font></h1>
+                                    
+                                    <!-- Classic 90s Animated GIFs -->
+                                    <div style="margin: 20px 0;">
+                                        <div class="dancing-baby" title="Dancing Baby - The Internet's First Viral Sensation!"></div>
+                                        <div class="construction-worker" title="Under Construction - Check Back Soon!"></div>
+                                        <div class="spinning-logo" title="Web Site Loading..."></div>
+                                    </div>
+                                    
+                                    <div style="margin: 15px 0;">
+                                        <div class="fire-gif" title="Hot New Content!"></div>
+                                        <div class="bouncing-ball" title="Cool Animation!"></div>
+                                        <div class="email-gif" title="You've Got Mail!"></div>
+                                    </div>
+                                    
+                                    <div class="starfield" title="Journey Through Cyberspace"></div>
+                                </center>
+                                
+                                <p><font face="Times New Roman" size="3">
+                                    <b>Greetings, fellow netizen!</b> You have successfully navigated to my corner of cyberspace! 
+                                    This page is best viewed with Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution.
+                                </font></p>
+                                
+                                <!-- Under Construction -->
+                                <center>
+                                    <div class="construction-worker" style="margin: 10px;"></div>
+                                    <br><font color="#FF0000" class="blink glow-text"><b>UNDER CONSTRUCTION!</b></font>
+                                    <br><font size="2">Last updated: December 31, 1999</font>
+                                </center>
+                                
+                                <hr width="50%" color="#FF00FF">
+                                
+                                <!-- Time Machine Section -->
+                                <center>
+                                    <h2><font color="#008000">🕰️ Cyber Time Machine 🕰️</font></h2>
+                                    <p>Travel through the years of the World Wide Web!</p>
+                                    <div class="time-slider-container">
+                                        <input type="range" id="time-slider" min="1995" max="1999" value="1999" class="time-slider">
+                                        <div class="time-labels">
+                                            <span>1995</span>
+                                            <span>1997</span>
+                                            <span>1999</span>
+                                        </div>
+                                        <div id="current-year">Currently viewing: <b>1999</b></div>
+                                    </div>
+                                </center>
+                                
+                                <hr width="50%" color="#00FFFF">
+                                
+                                <!-- Y2K Countdown -->
+                                <center>
+                                    <h3><font color="#FF0000">⚠️ Y2K COUNTDOWN ⚠️</font></h3>
+                                    <div id="y2k-countdown" class="countdown-display">
+                                        <div id="countdown-timer">Loading...</div>
+                                        <div class="countdown-warning">Prepare for the millennium bug!</div>
+                                    </div>
+                                </center>
+                                
+                                <br><br>
+                                
+                                <!-- Webring Navigation -->
+                                <center>
+                                    <table border="2" cellpadding="5" bgcolor="#FFFF00">
+                                        <tr>
+                                            <td align="center">
+                                                <font size="2"><b>🔗 CyberKids WebRing 🔗</b><br>
+                                                <a href="#">[Previous]</a> |
+                                                <a href="#">[Random]</a> |
+                                                <a href="#">[Next]</a><br>
+                                                Member #1337 of 42,069 sites</font>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Bottom Banner -->
+        <table width="100%" cellpadding="5" bgcolor="#000080">
+            <tr>
+                <td align="center">
+                    <font color="#FFFF00" size="2">
+                        <b>This site is optimized for 56k modem users! 🌐 Best viewed in 256 colors! 🎨</b>
+                    </font>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="modem-sound" preload="auto">
+        <!-- We'll add modem sound source later -->
+    </audio>
+    
+    <audio id="bg-music" loop>
+        <!-- Background MIDI-style music will go here -->
+    </audio>
+    
+    <script src="js/dialup.js"></script>
+    <script src="js/features.js"></script>
+    <script src="js/visual-effects.js"></script>
+    <script src="js/guestbook.js"></script>
+    <script src="js/chatroom.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
