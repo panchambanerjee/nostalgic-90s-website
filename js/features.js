@@ -1,53 +1,366 @@
-// Additional 90s Website Features
-class TimeMachine {
+// Y2K Countdown and Virtual Pet Features
+class Y2KCountdown {
     constructor() {
-        this.currentYear = 1999;
-        this.yearData = {
-            1995: {
-                colors: { bg: '#808080', text: '#000000', accent: '#0000FF' },
-                content: {
-                    title: '🌐 Welcome to the World Wide Web! 🌐',
-                    subtitle: 'Information at your fingertips!',
-                    features: ['Basic HTML', 'Simple graphics', 'Text-based design', 'Slow dial-up speeds']
-                }
-            },
-            1997: {
-                colors: { bg: '#FFFFFF', text: '#000080', accent: '#FF0000' },
-                content: {
-                    title: '🎨 Web Design Revolution! 🎨',
-                    subtitle: 'Now with tables and frames!',
-                    features: ['Table layouts', 'Background images', 'Basic JavaScript', 'Animated GIFs everywhere']
-                }
-            },
-            1999: {
-                colors: { bg: '#FFFFFF', text: '#000000', accent: '#FF00FF' },
-                content: {
-                    title: '🚀 Millennium Web Experience! 🚀',
-                    subtitle: 'Y2K compliant and future-ready!',
-                    features: ['Advanced animations', 'Flash content', 'Pop-up windows', 'E-commerce ready']
-                }
-            }
-        };
-        
-        this.initializeTimeMachine();
+        this.targetDate = new Date('2000-01-01T00:00:00');
+        this.glitchTriggered = false;
+        this.initializeCountdown();
     }
     
-    initializeTimeMachine() {
-        const slider = document.getElementById('time-slider');
-        const currentYearDisplay = document.getElementById('current-year');
+    initializeCountdown() {
+        this.updateCountdown();
+        setInterval(() => this.updateCountdown(), 1000);
+    }
+    
+    updateCountdown() {
+        const now = new Date();
+        const timeLeft = this.targetDate - now;
         
-        if (slider && currentYearDisplay) {
-            slider.addEventListener('input', (e) => {
-                this.travelToYear(parseInt(e.target.value));
-            });
+        const timer = document.getElementById('countdown-timer');
+        if (!timer) return;
+        
+        if (timeLeft <= 0) {
+            if (!this.glitchTriggered) {
+                this.triggerY2KGlitch();
+                this.glitchTriggered = true;
+            }
+            timer.textContent = '💥 Y2K HAPPENED! 💥';
+            return;
+        }
+        
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        
+        // Trigger glitch effect when close to Y2K
+        if (timeLeft < 10000 && !this.glitchTriggered) { // 10 seconds
+            this.triggerY2KGlitch();
+            this.glitchTriggered = true;
         }
     }
     
-    travelToYear(year) {
-        this.currentYear = year;
-        const yearInfo = this.yearData[year];
+    triggerY2KGlitch() {
+        // Screen goes crazy for a few seconds
+        this.showGlitchOverlay();
         
-        // Update year display
-        const currentYearDisplay = document.getElementById('current-year');
-        if (currentYearDisplay) {
-            currentYearDisplay.innerHTML = `Currently viewing: <b>${year}</b>`;\n        }\n        \n        // Apply visual changes based on year\n        this.applyYearTheme(yearInfo);\n        \n        // Show time travel effect\n        this.showTimeWarpEffect();\n    }\n    \n    applyYearTheme(yearInfo) {\n        const mainContent = document.getElementById('main-content');\n        if (!mainContent) return;\n        \n        // Temporarily apply theme\n        mainContent.style.transition = 'all 1s ease';\n        mainContent.style.filter = 'sepia(0.8) hue-rotate(' + (this.currentYear - 1995) * 30 + 'deg)';\n        \n        // Reset after effect\n        setTimeout(() => {\n            mainContent.style.filter = '';\n        }, 2000);\n    }\n    \n    showTimeWarpEffect() {\n        const effect = document.createElement('div');\n        effect.style.cssText = `\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100vw;\n            height: 100vh;\n            background: radial-gradient(circle, transparent 30%, rgba(255,255,255,0.8) 70%);\n            z-index: 9998;\n            pointer-events: none;\n            animation: timeWarp 1.5s ease-out;\n        `;\n        \n        document.body.appendChild(effect);\n        \n        setTimeout(() => effect.remove(), 1500);\n    }\n}\n\nclass Y2KCountdown {\n    constructor() {\n        this.targetDate = new Date('2000-01-01T00:00:00');\n        this.glitchTriggered = false;\n        this.initializeCountdown();\n    }\n    \n    initializeCountdown() {\n        this.updateCountdown();\n        setInterval(() => this.updateCountdown(), 1000);\n    }\n    \n    updateCountdown() {\n        const now = new Date();\n        const timeLeft = this.targetDate - now;\n        \n        const timer = document.getElementById('countdown-timer');\n        if (!timer) return;\n        \n        if (timeLeft <= 0) {\n            if (!this.glitchTriggered) {\n                this.triggerY2KGlitch();\n                this.glitchTriggered = true;\n            }\n            timer.textContent = '💥 Y2K HAPPENED! 💥';\n            return;\n        }\n        \n        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));\n        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));\n        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);\n        \n        timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;\n        \n        // Trigger glitch effect when close to Y2K\n        if (timeLeft < 10000 && !this.glitchTriggered) { // 10 seconds\n            this.triggerY2KGlitch();\n            this.glitchTriggered = true;\n        }\n    }\n    \n    triggerY2KGlitch() {\n        // Screen goes crazy for a few seconds\n        this.showGlitchOverlay();\n        \n        // Scramble text temporarily\n        setTimeout(() => this.scramblePageText(), 500);\n        \n        // Recovery message\n        setTimeout(() => this.showRecoveryMessage(), 3000);\n    }\n    \n    showGlitchOverlay() {\n        const overlay = document.createElement('div');\n        overlay.style.cssText = `\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100vw;\n            height: 100vh;\n            background: repeating-linear-gradient(\n                45deg,\n                #FF0000 0px,\n                #00FF00 2px,\n                #0000FF 4px,\n                #FFFF00 6px\n            );\n            z-index: 9999;\n            animation: glitchFlicker 3s ease-out;\n            pointer-events: none;\n        `;\n        \n        document.body.appendChild(overlay);\n        \n        setTimeout(() => overlay.remove(), 3000);\n    }\n    \n    scramblePageText() {\n        const textElements = document.querySelectorAll('p, h1, h2, h3, span, div');\n        const originalTexts = new Map();\n        \n        textElements.forEach(el => {\n            if (el.textContent.trim()) {\n                originalTexts.set(el, el.textContent);\n                el.textContent = this.generateGlitchText(el.textContent.length);\n            }\n        });\n        \n        // Restore original text after 2 seconds\n        setTimeout(() => {\n            originalTexts.forEach((text, el) => {\n                el.textContent = text;\n            });\n        }, 2000);\n    }\n    \n    generateGlitchText(length) {\n        const chars = '!@#$%^&*()[]{}|;:,.<>?~`';\n        return Array.from({length}, () => chars[Math.floor(Math.random() * chars.length)]).join('');\n    }\n    \n    showRecoveryMessage() {\n        const message = document.createElement('div');\n        message.style.cssText = `\n            position: fixed;\n            top: 50%;\n            left: 50%;\n            transform: translate(-50%, -50%);\n            background: #000080;\n            color: #FFFFFF;\n            padding: 20px;\n            border: 3px outset #C0C0C0;\n            font-family: 'Courier New', monospace;\n            z-index: 10000;\n            text-align: center;\n            box-shadow: 10px 10px 20px rgba(0,0,0,0.5);\n        `;\n        \n        message.innerHTML = `\n            <h3>🔧 SYSTEM RECOVERY 🔧</h3>\n            <p>Y2K bug detected and neutralized!</p>\n            <p>All systems operational.</p>\n            <p>Welcome to the new millennium!</p>\n            <button onclick=\"this.parentElement.remove()\" style=\"margin-top: 10px;\">OK</button>\n        `;\n        \n        document.body.appendChild(message);\n        \n        // Auto-remove after 10 seconds\n        setTimeout(() => {\n            if (message.parentElement) {\n                message.remove();\n            }\n        }, 10000);\n    }\n}\n\nclass VirtualPet {\n    constructor() {\n        this.petData = {\n            name: localStorage.getItem('pet-name') || 'CyberPet',\n            happiness: parseInt(localStorage.getItem('pet-happiness')) || 50,\n            hunger: parseInt(localStorage.getItem('pet-hunger')) || 50,\n            energy: parseInt(localStorage.getItem('pet-energy')) || 50,\n            lastFed: parseInt(localStorage.getItem('pet-last-fed')) || Date.now()\n        };\n        \n        this.petEmojis = ['😴', '😊', '😃', '🤩', '😍'];\n        this.initializePet();\n    }\n    \n    initializePet() {\n        this.updatePetDisplay();\n        \n        // Pet needs decay over time\n        setInterval(() => {\n            this.updatePetNeeds();\n            this.savePetData();\n        }, 30000); // Every 30 seconds\n        \n        // Random pet animations\n        setInterval(() => {\n            this.animatePet();\n        }, 5000);\n    }\n    \n    updatePetNeeds() {\n        const now = Date.now();\n        const timeSinceLastFed = now - this.petData.lastFed;\n        const hoursPasssed = timeSinceLastFed / (1000 * 60 * 60);\n        \n        // Decrease stats over time\n        this.petData.hunger = Math.max(0, this.petData.hunger - hoursPasssed * 2);\n        this.petData.happiness = Math.max(0, this.petData.happiness - hoursPasssed * 1);\n        this.petData.energy = Math.max(0, this.petData.energy - hoursPasssed * 1.5);\n        \n        this.updatePetDisplay();\n    }\n    \n    updatePetDisplay() {\n        const miniPet = document.getElementById('mini-pet');\n        const petStatus = document.querySelector('.pet-status');\n        \n        if (miniPet) {\n            const avgStat = (this.petData.happiness + this.petData.hunger + this.petData.energy) / 3;\n            const emojiIndex = Math.min(4, Math.floor(avgStat / 20));\n            miniPet.textContent = this.petEmojis[emojiIndex];\n        }\n        \n        if (petStatus) {\n            if (avgStat < 30) {\n                petStatus.textContent = 'Needs Care!';\n                petStatus.style.color = '#FF0000';\n            } else if (avgStat < 70) {\n                petStatus.textContent = 'Doing OK';\n                petStatus.style.color = '#FFA500';\n            } else {\n                petStatus.textContent = 'Happy!';\n                petStatus.style.color = '#008000';\n            }\n        }\n    }\n    \n    animatePet() {\n        const miniPet = document.getElementById('mini-pet');\n        if (miniPet) {\n            miniPet.style.transform = 'scale(1.2) rotate(10deg)';\n            setTimeout(() => {\n                miniPet.style.transform = '';\n            }, 200);\n        }\n    }\n    \n    feedPet() {\n        this.petData.hunger = Math.min(100, this.petData.hunger + 20);\n        this.petData.happiness = Math.min(100, this.petData.happiness + 10);\n        this.petData.lastFed = Date.now();\n        this.savePetData();\n        this.updatePetDisplay();\n    }\n    \n    playWithPet() {\n        this.petData.happiness = Math.min(100, this.petData.happiness + 15);\n        this.petData.energy = Math.max(0, this.petData.energy - 10);\n        this.savePetData();\n        this.updatePetDisplay();\n    }\n    \n    petSleep() {\n        this.petData.energy = Math.min(100, this.petData.energy + 25);\n        this.savePetData();\n        this.updatePetDisplay();\n    }\n    \n    savePetData() {\n        Object.entries(this.petData).forEach(([key, value]) => {\n            localStorage.setItem(`pet-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, value.toString());\n        });\n    }\n}\n\n// Initialize features when main content loads\nwindow.initializeFeatures = function() {\n    new TimeMachine();\n    new Y2KCountdown();\n    window.virtualPet = new VirtualPet();\n};\n\n// Pet care functions\nwindow.openPetWindow = function() {\n    const petWindow = document.createElement('div');\n    petWindow.style.cssText = `\n        position: fixed;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        background: #C0C0C0;\n        border: 2px outset #C0C0C0;\n        padding: 20px;\n        z-index: 10000;\n        font-family: 'Comic Neue', 'Comic Sans MS', cursive;\n        text-align: center;\n        min-width: 300px;\n        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);\n    `;\n    \n    const pet = window.virtualPet;\n    petWindow.innerHTML = `\n        <div style=\"background: #000080; color: white; padding: 5px; margin: -20px -20px 15px -20px;\">\n            <b>🐾 CyberPet Care Center 🐾</b>\n            <button onclick=\"this.parentElement.parentElement.remove()\" style=\"float: right; background: #FF0000; color: white; border: none; width: 20px; height: 20px;\">×</button>\n        </div>\n        \n        <div style=\"font-size: 48px; margin: 10px 0;\">${pet.petEmojis[Math.min(4, Math.floor((pet.petData.happiness + pet.petData.hunger + pet.petData.energy) / 60))]}</div>\n        \n        <div style=\"text-align: left; margin: 15px 0;\">\n            <div>Happiness: <progress value=\"${pet.petData.happiness}\" max=\"100\"></progress> ${Math.round(pet.petData.happiness)}%</div>\n            <div>Hunger: <progress value=\"${pet.petData.hunger}\" max=\"100\"></progress> ${Math.round(pet.petData.hunger)}%</div>\n            <div>Energy: <progress value=\"${pet.petData.energy}\" max=\"100\"></progress> ${Math.round(pet.petData.energy)}%</div>\n        </div>\n        \n        <div style=\"margin: 15px 0;\">\n            <button onclick=\"window.virtualPet.feedPet(); this.parentElement.parentElement.remove(); window.openPetWindow();\">🍎 Feed</button>\n            <button onclick=\"window.virtualPet.playWithPet(); this.parentElement.parentElement.remove(); window.openPetWindow();\">🎾 Play</button>\n            <button onclick=\"window.virtualPet.petSleep(); this.parentElement.parentElement.remove(); window.openPetWindow();\">😴 Sleep</button>\n        </div>\n    `;\n    \n    document.body.appendChild(petWindow);\n};\n\n// Add CSS for new animations\nconst featureCSS = `\n@keyframes timeWarp {\n    0% { transform: scale(1) rotate(0deg); opacity: 0; }\n    50% { transform: scale(1.1) rotate(180deg); opacity: 1; }\n    100% { transform: scale(1) rotate(360deg); opacity: 0; }\n}\n\n@keyframes glitchFlicker {\n    0%, 100% { opacity: 0; }\n    10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% { opacity: 0.8; }\n    15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { opacity: 0.1; }\n}\n\nprogress {\n    width: 100px;\n    height: 15px;\n    border: 1px inset #C0C0C0;\n    background: #FFFFFF;\n}\n\nprogress::-webkit-progress-bar {\n    background: #FFFFFF;\n    border: 1px inset #C0C0C0;\n}\n\nprogress::-webkit-progress-value {\n    background: linear-gradient(90deg, #FF0000, #FFFF00, #00FF00);\n}\n`;\n\nconst style = document.createElement('style');\nstyle.textContent = featureCSS;\ndocument.head.appendChild(style);
+        // Scramble text temporarily
+        setTimeout(() => this.scramblePageText(), 500);
+        
+        // Recovery message
+        setTimeout(() => this.showRecoveryMessage(), 3000);
+    }
+    
+    showGlitchOverlay() {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(
+                45deg,
+                #FF0000 0px,
+                #00FF00 2px,
+                #0000FF 4px,
+                #FFFF00 6px
+            );
+            z-index: 9999;
+            animation: glitchFlicker 3s ease-out;
+            pointer-events: none;
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        setTimeout(() => overlay.remove(), 3000);
+    }
+    
+    scramblePageText() {
+        const textElements = document.querySelectorAll('p, h1, h2, h3, span, div');
+        const originalTexts = new Map();
+        
+        textElements.forEach(el => {
+            if (el.textContent.trim()) {
+                originalTexts.set(el, el.textContent);
+                el.textContent = this.generateGlitchText(el.textContent.length);
+            }
+        });
+        
+        // Restore original text after 2 seconds
+        setTimeout(() => {
+            originalTexts.forEach((text, el) => {
+                el.textContent = text;
+            });
+        }, 2000);
+    }
+    
+    generateGlitchText(length) {
+        const chars = '!@#$%^&*()[]{}|;:,.<>?~`';
+        return Array.from({length}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+    
+    showRecoveryMessage() {
+        const message = document.createElement('div');
+        message.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000080;
+            color: #FFFFFF;
+            padding: 20px;
+            border: 3px outset #C0C0C0;
+            font-family: 'Courier New', monospace;
+            z-index: 10000;
+            text-align: center;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+        `;
+        
+        message.innerHTML = `
+            <h3>🔧 SYSTEM RECOVERY 🔧</h3>
+            <p>Y2K bug detected and neutralized!</p>
+            <p>All systems operational.</p>
+            <p>Welcome to the new millennium!</p>
+            <button onclick="this.parentElement.remove()" style="margin-top: 10px;">OK</button>
+        `;
+        
+        document.body.appendChild(message);
+        
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (message.parentElement) {
+                message.remove();
+            }
+        }, 10000);
+    }
+}
+
+class VirtualPet {
+    constructor() {
+        this.petData = {
+            name: localStorage.getItem('pet-name') || 'CyberPet',
+            happiness: parseInt(localStorage.getItem('pet-happiness')) || 50,
+            hunger: parseInt(localStorage.getItem('pet-hunger')) || 50,
+            energy: parseInt(localStorage.getItem('pet-energy')) || 50,
+            lastFed: parseInt(localStorage.getItem('pet-last-fed')) || Date.now()
+        };
+        
+        this.petEmojis = ['😴', '😊', '😃', '🤩', '😍'];
+        this.initializePet();
+    }
+    
+    initializePet() {
+        this.updatePetDisplay();
+        
+        // Pet needs decay over time
+        setInterval(() => {
+            this.updatePetNeeds();
+            this.savePetData();
+        }, 30000); // Every 30 seconds
+        
+        // Random pet animations
+        setInterval(() => {
+            this.animatePet();
+        }, 5000);
+    }
+    
+    updatePetNeeds() {
+        const now = Date.now();
+        const timeSinceLastFed = now - this.petData.lastFed;
+        const hoursPasssed = timeSinceLastFed / (1000 * 60 * 60);
+        
+        // Decrease stats over time
+        this.petData.hunger = Math.max(0, this.petData.hunger - hoursPasssed * 2);
+        this.petData.happiness = Math.max(0, this.petData.happiness - hoursPasssed * 1);
+        this.petData.energy = Math.max(0, this.petData.energy - hoursPasssed * 1.5);
+        
+        this.updatePetDisplay();
+    }
+    
+    updatePetDisplay() {
+        const miniPet = document.getElementById('mini-pet');
+        const petStatus = document.querySelector('.pet-status');
+        
+        const avgStat = (this.petData.happiness + this.petData.hunger + this.petData.energy) / 3;
+        
+        if (miniPet) {
+            const emojiIndex = Math.min(4, Math.floor(avgStat / 20));
+            miniPet.textContent = this.petEmojis[emojiIndex];
+        }
+        
+        if (petStatus) {
+            if (avgStat < 30) {
+                petStatus.textContent = 'Needs Care!';
+                petStatus.style.color = '#FF0000';
+            } else if (avgStat < 70) {
+                petStatus.textContent = 'Doing OK';
+                petStatus.style.color = '#FFA500';
+            } else {
+                petStatus.textContent = 'Happy!';
+                petStatus.style.color = '#008000';
+            }
+        }
+    }
+    
+    animatePet() {
+        const miniPet = document.getElementById('mini-pet');
+        if (miniPet) {
+            miniPet.style.transform = 'scale(1.2) rotate(10deg)';
+            setTimeout(() => {
+                miniPet.style.transform = '';
+            }, 200);
+        }
+    }
+    
+    feedPet() {
+        this.petData.hunger = Math.min(100, this.petData.hunger + 20);
+        this.petData.happiness = Math.min(100, this.petData.happiness + 10);
+        this.petData.lastFed = Date.now();
+        this.savePetData();
+        this.updatePetDisplay();
+        
+        // Show feedback
+        this.showPetFeedback('🍎 Fed! +20 Hunger, +10 Happiness');
+    }
+    
+    playWithPet() {
+        this.petData.happiness = Math.min(100, this.petData.happiness + 15);
+        this.petData.energy = Math.max(0, this.petData.energy - 10);
+        this.savePetData();
+        this.updatePetDisplay();
+        
+        // Show feedback
+        this.showPetFeedback('🎾 Played! +15 Happiness, -10 Energy');
+    }
+    
+    petSleep() {
+        this.petData.energy = Math.min(100, this.petData.energy + 25);
+        this.savePetData();
+        this.updatePetDisplay();
+        
+        // Show feedback
+        this.showPetFeedback('😴 Slept! +25 Energy');
+    }
+    
+    showPetFeedback(message) {
+        const feedback = document.createElement('div');
+        feedback.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #FFFFCC;
+            border: 2px outset #C0C0C0;
+            padding: 10px;
+            z-index: 10001;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 12px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        `;
+        
+        feedback.textContent = message;
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+            feedback.remove();
+        }, 3000);
+    }
+    
+    savePetData() {
+        Object.entries(this.petData).forEach(([key, value]) => {
+            localStorage.setItem(`pet-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, value.toString());
+        });
+    }
+}
+
+// Initialize features when main content loads
+window.initializeFeatures = function() {
+    new Y2KCountdown();
+    window.virtualPet = new VirtualPet();
+};
+
+// Pet care functions
+window.openPetWindow = function() {
+    if (!window.virtualPet) {
+        alert('Pet system not initialized yet! Please wait a moment and try again.');
+        return;
+    }
+    
+    const petWindow = document.createElement('div');
+    petWindow.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #C0C0C0;
+        border: 2px outset #C0C0C0;
+        padding: 20px;
+        z-index: 10000;
+        font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+        text-align: center;
+        min-width: 300px;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    `;
+    
+    const pet = window.virtualPet;
+    const avgStat = (pet.petData.happiness + pet.petData.hunger + pet.petData.energy) / 3;
+    const emojiIndex = Math.min(4, Math.floor(avgStat / 20));
+    
+    petWindow.innerHTML = `
+        <div style="background: #000080; color: white; padding: 5px; margin: -20px -20px 15px -20px;">
+            <b>🐾 CyberPet Care Center 🐾</b>
+            <button onclick="this.parentElement.parentElement.remove()" style="float: right; background: #FF0000; color: white; border: none; width: 20px; height: 20px;">×</button>
+        </div>
+        
+        <div style="font-size: 48px; margin: 10px 0;">${pet.petEmojis[emojiIndex]}</div>
+        <div style="font-weight: bold; margin: 5px 0;">${pet.petData.name}</div>
+        
+        <div style="text-align: left; margin: 15px 0;">
+            <div>Happiness: <progress value="${pet.petData.happiness}" max="100"></progress> ${Math.round(pet.petData.happiness)}%</div>
+            <div>Hunger: <progress value="${pet.petData.hunger}" max="100"></progress> ${Math.round(pet.petData.hunger)}%</div>
+            <div>Energy: <progress value="${pet.petData.energy}" max="100"></progress> ${Math.round(pet.petData.energy)}%</div>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <button onclick="window.virtualPet.feedPet(); this.parentElement.parentElement.remove(); window.openPetWindow();">🍎 Feed</button>
+            <button onclick="window.virtualPet.playWithPet(); this.parentElement.parentElement.remove(); window.openPetWindow();">🎾 Play</button>
+            <button onclick="window.virtualPet.petSleep(); this.parentElement.parentElement.remove(); window.openPetWindow();">😴 Sleep</button>
+        </div>
+        
+        <div style="font-size: 10px; color: #666; margin-top: 10px;">
+            Last fed: ${new Date(pet.petData.lastFed).toLocaleTimeString()}
+        </div>
+    `;
+    
+    document.body.appendChild(petWindow);
+};
+
+// Add CSS for new animations
+const featureCSS = `
+@keyframes glitchFlicker {
+    0%, 100% { opacity: 0; }
+    10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% { opacity: 0.8; }
+    15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { opacity: 0.1; }
+}
+
+progress {
+    width: 120px;
+    height: 15px;
+    border: 1px inset #C0C0C0;
+    background: #FFFFFF;
+}
+
+progress::-webkit-progress-bar {
+    background: #FFFFFF;
+    border: 1px inset #C0C0C0;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, #FF0000, #FFFF00, #00FF00);
+}
+`;
+
+const style = document.createElement('style');
+style.textContent = featureCSS;
+document.head.appendChild(style);

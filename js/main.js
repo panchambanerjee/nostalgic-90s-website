@@ -147,13 +147,11 @@ class NostalgicWebsite {
     }
     
     toggleMusic() {
-        const bgMusic = document.getElementById('bg-music');
         if (this.musicEnabled) {
-            bgMusic.pause();
+            this.stopBackgroundMusic();
             this.musicEnabled = false;
             this.updateMusicButton('🎵 Play Music 🎵');
         } else {
-            // Create simple background music using Web Audio API
             this.playBackgroundMusic();
             this.musicEnabled = true;
             this.updateMusicButton('🔇 Stop Music 🔇');
@@ -168,42 +166,58 @@ class NostalgicWebsite {
     }
     
     playBackgroundMusic() {
-        if (!window.AudioContext && !window.webkitAudioContext) return;
-        
         try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // Create audio context
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Create a simple looping melody
-            const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]; // C major scale
+            // Create a simple melody pattern
+            const melody = [261.63, 293.66, 329.63, 349.23, 392.00, 349.23, 329.63, 293.66]; // C major melody
             let noteIndex = 0;
             
-            const playNote = () => {
+            const playNextNote = () => {
                 if (!this.musicEnabled) return;
                 
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
                 
                 oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
+                gainNode.connect(this.audioContext.destination);
                 
-                oscillator.frequency.setValueAtTime(notes[noteIndex], audioContext.currentTime);
-                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(melody[noteIndex], this.audioContext.currentTime);
+                oscillator.type = 'square'; // Classic 8-bit sound
                 
-                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.1);
-                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
+                gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.1, this.audioContext.currentTime + 0.05);
+                gainNode.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 0.5);
                 
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.4);
+                oscillator.start(this.audioContext.currentTime);
+                oscillator.stop(this.audioContext.currentTime + 0.5);
                 
-                noteIndex = (noteIndex + 1) % notes.length;
+                noteIndex = (noteIndex + 1) % melody.length;
                 
-                setTimeout(playNote, 500);
+                // Schedule next note
+                if (this.musicEnabled) {
+                    this.musicTimeout = setTimeout(playNextNote, 600);
+                }
             };
             
-            playNote();
-        } catch (e) {
-            console.log('Audio not supported');
+            // Start the melody
+            playNextNote();
+            
+        } catch (error) {
+            console.log('Web Audio API not supported');
+        }
+    }
+    
+    stopBackgroundMusic() {
+        if (this.musicTimeout) {
+            clearTimeout(this.musicTimeout);
+            this.musicTimeout = null;
+        }
+        
+        if (this.audioContext) {
+            this.audioContext.close();
+            this.audioContext = null;
         }
     }
 }
