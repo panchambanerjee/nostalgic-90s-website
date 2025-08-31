@@ -127,57 +127,168 @@ class DialupSimulator {
     }
     
     playModemSounds() {
-        // First try to play the actual modem sound file
-        this.playActualModemSound();
-        
-        // Also create synthetic modem sounds as backup
-        setTimeout(() => this.createModemTones(), 500);
+        // Create realistic modem handshake sounds using Web Audio API
+        this.createRealisticModemSequence();
         
         // Add some random static noise
-        setTimeout(() => this.addStaticNoise(), 2000);
+        setTimeout(() => this.addStaticNoise(), 1000);
     }
     
-    playActualModemSound() {
-        const modemAudio = document.createElement('audio');
-        modemAudio.src = './sounds/dial-up-modem-01.mp3';
-        modemAudio.volume = 0.3;
-        modemAudio.preload = 'auto';
-        
-        modemAudio.play().catch(error => {
-            console.log('Could not play modem sound file, using synthetic sounds:', error);
-        });
-    }
-    
-    createModemTones() {
+    createRealisticModemSequence() {
         if (!window.AudioContext && !window.webkitAudioContext) {
-            return; // No audio support
+            console.log('Web Audio API not supported');
+            return;
         }
         
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
-        // Create the classic modem handshake sequence
-        const frequencies = [2100, 1200, 2400, 1200, 2100]; // Typical modem frequencies
-        let time = audioContext.currentTime;
+        // Realistic modem handshake sequence with proper frequencies and timing
+        const modemSequence = [
+            // Initial dial tone and ring
+            { type: 'tone', freq: 350, duration: 0.5, volume: 0.15, delay: 0 },
+            { type: 'tone', freq: 440, duration: 0.5, volume: 0.15, delay: 0.1 },
+            
+            // Answering tone (2100 Hz)
+            { type: 'tone', freq: 2100, duration: 1.0, volume: 0.2, delay: 1.0 },
+            
+            // V.21 calling tone (1650 Hz)
+            { type: 'tone', freq: 1650, duration: 0.8, volume: 0.18, delay: 2.2 },
+            
+            // V.22 Answer back (2225 Hz)
+            { type: 'tone', freq: 2225, duration: 0.6, volume: 0.16, delay: 3.2 },
+            
+            // Training sequence - rapid frequency changes
+            { type: 'sweep', startFreq: 1200, endFreq: 2400, duration: 1.5, volume: 0.12, delay: 4.0 },
+            
+            // V.32 training (scrambled data)
+            { type: 'noise', freq: 1700, duration: 2.0, volume: 0.1, delay: 5.8 },
+            
+            // Final handshake tones
+            { type: 'tone', freq: 1200, duration: 0.3, volume: 0.08, delay: 8.0 },
+            { type: 'tone', freq: 2400, duration: 0.3, volume: 0.08, delay: 8.4 },
+            
+            // Carrier established - quieter data tones
+            { type: 'data', freq: 1700, duration: 1.0, volume: 0.06, delay: 9.0 }
+        ];
         
-        frequencies.forEach((freq, index) => {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(freq, time);
-            oscillator.type = 'sawtooth'; // More authentic modem sound
-            
-            gainNode.gain.setValueAtTime(0, time);
-            gainNode.gain.linearRampToValueAtTime(0.1, time + 0.1);
-            gainNode.gain.linearRampToValueAtTime(0, time + 0.8);
-            
-            oscillator.start(time);
-            oscillator.stop(time + 0.8);
-            
-            time += 0.6;
+        modemSequence.forEach(sound => {
+            setTimeout(() => {
+                this.createModemSound(audioContext, sound);
+            }, sound.delay * 1000);
         });
+    }
+    
+    createModemSound(audioContext, soundConfig) {
+        const { type, freq, duration, volume, startFreq, endFreq } = soundConfig;
+        
+        switch(type) {
+            case 'tone':
+                this.createTone(audioContext, freq, duration, volume);
+                break;
+            case 'sweep':
+                this.createFrequencySweep(audioContext, startFreq, endFreq, duration, volume);
+                break;
+            case 'noise':
+                this.createModulatedNoise(audioContext, freq, duration, volume);
+                break;
+            case 'data':
+                this.createDataTones(audioContext, freq, duration, volume);
+                break;
+        }
+    }
+    
+    createTone(audioContext, frequency, duration, volume) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+        oscillator.type = 'sine'; // Pure tone for carrier signals
+        
+        // Envelope for realistic sound
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.05);
+        gainNode.gain.linearRampToValueAtTime(volume * 0.8, audioContext.currentTime + duration * 0.8);
+        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+    }
+    
+    createFrequencySweep(audioContext, startFreq, endFreq, duration, volume) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(startFreq, audioContext.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(endFreq, audioContext.currentTime + duration);
+        oscillator.type = 'sawtooth'; // More complex waveform for training
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.1);
+        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+    }
+    
+    createModulatedNoise(audioContext, centerFreq, duration, volume) {
+        // Create white noise buffer
+        const bufferSize = audioContext.sampleRate * duration;
+        const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+        const data = buffer.getChannelData(0);
+        
+        // Generate filtered noise
+        for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * volume;
+        }
+        
+        const noiseSource = audioContext.createBufferSource();
+        const filter = audioContext.createBiquadFilter();
+        const gainNode = audioContext.createGain();
+        
+        noiseSource.buffer = buffer;
+        noiseSource.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Band-pass filter to simulate modem training data
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(centerFreq, audioContext.currentTime);
+        filter.Q.setValueAtTime(5, audioContext.currentTime);
+        
+        gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + duration);
+        
+        noiseSource.start(audioContext.currentTime);
+    }
+    
+    createDataTones(audioContext, frequency, duration, volume) {
+        // Simulate actual data transmission with rapid phase shifts
+        for (let i = 0; i < duration * 10; i++) {
+            setTimeout(() => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Random frequency modulation to simulate data
+                const freqVariation = frequency + (Math.random() - 0.5) * 200;
+                oscillator.frequency.setValueAtTime(freqVariation, audioContext.currentTime);
+                oscillator.type = 'square'; // Digital-like waveform
+                
+                gainNode.gain.setValueAtTime(volume * 0.5, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.05);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.05);
+            }, i * 100);
+        }
     }
     
     addStaticNoise() {
@@ -186,23 +297,44 @@ class DialupSimulator {
         }
         
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const bufferSize = audioContext.sampleRate * 0.5; // 0.5 seconds of noise
+        
+        // Create realistic line noise with crackling
+        const bufferSize = audioContext.sampleRate * 2.0; // 2 seconds of noise
         const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
         const data = buffer.getChannelData(0);
         
-        // Generate white noise
+        // Generate realistic line noise
         for (let i = 0; i < bufferSize; i++) {
-            data[i] = (Math.random() * 2 - 1) * 0.05; // Low volume noise
+            // Base white noise
+            let noise = (Math.random() * 2 - 1) * 0.02;
+            
+            // Add occasional crackling sounds
+            if (Math.random() < 0.001) {
+                noise += (Math.random() * 2 - 1) * 0.15;
+            }
+            
+            // Add low-frequency hum (50/60 Hz interference)
+            const hum = Math.sin(2 * Math.PI * 60 * i / audioContext.sampleRate) * 0.01;
+            
+            data[i] = noise + hum;
         }
         
         const noiseSource = audioContext.createBufferSource();
+        const filter = audioContext.createBiquadFilter();
         const gainNode = audioContext.createGain();
         
         noiseSource.buffer = buffer;
-        noiseSource.connect(gainNode);
+        noiseSource.connect(filter);
+        filter.connect(gainNode);
         gainNode.connect(audioContext.destination);
         
-        gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+        // High-pass filter to simulate phone line characteristics
+        filter.type = 'highpass';
+        filter.frequency.setValueAtTime(300, audioContext.currentTime);
+        
+        gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.01, audioContext.currentTime + 1.0);
+        gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 2.0);
         
         noiseSource.start();
     }
