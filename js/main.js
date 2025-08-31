@@ -872,7 +872,61 @@ class NostalgicWebsite {
         const trackDisplay = document.getElementById('track-marquee');
         if (trackDisplay && this.musicTracks[this.currentTrack]) {
             const track = this.musicTracks[this.currentTrack];
-            trackDisplay.textContent = `${track.name} - Track ${this.currentTrack + 1}/${this.musicTracks.length}`;
+            trackDisplay.textContent = `🎵 ${track.name} - Track ${this.currentTrack + 1}/${this.musicTracks.length} 🎵`;
+            
+            // Add spectrum analyzer effect
+            this.addSpectrumAnalyzer();
+        }
+    }
+    
+    addSpectrumAnalyzer() {
+        const winampPlayer = document.getElementById('winamp-player');
+        if (!winampPlayer) return;
+        
+        // Remove existing spectrum analyzer
+        const existing = winampPlayer.querySelector('.spectrum-analyzer');
+        if (existing) existing.remove();
+        
+        // Create spectrum analyzer
+        const spectrum = document.createElement('div');
+        spectrum.className = 'spectrum-analyzer';
+        spectrum.style.cssText = `
+            display: flex;
+            align-items: end;
+            height: 20px;
+            gap: 1px;
+            margin: 5px 0;
+            background: #000;
+            border: 1px inset #C0C0C0;
+            padding: 2px;
+        `;
+        
+        // Create spectrum bars
+        for (let i = 0; i < 16; i++) {
+            const bar = document.createElement('div');
+            bar.style.cssText = `
+                width: 4px;
+                background: linear-gradient(180deg, #FF0000, #FFFF00, #00FF00);
+                animation: spectrumBar${i} ${0.2 + Math.random() * 0.3}s ease-in-out infinite alternate;
+                border-radius: 1px;
+            `;
+            spectrum.appendChild(bar);
+            
+            // Add unique animation for each bar
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes spectrumBar${i} {
+                    0% { height: 2px; opacity: 0.5; }
+                    100% { height: ${4 + Math.random() * 12}px; opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Insert spectrum analyzer after track display
+        const trackDisplay = winampPlayer.querySelector('#track-display');
+        if (trackDisplay) {
+            trackDisplay.parentNode.insertBefore(spectrum, trackDisplay.nextSibling);
         }
     }
     
@@ -905,19 +959,77 @@ class NostalgicWebsite {
     setVolume(level) {
         this.volume = level;
         
-        // Update visual volume bars
+        // Update visual volume bars with animation
         const volumeBars = document.querySelectorAll('.vol-bar');
         volumeBars.forEach((bar, index) => {
             if (index < level) {
                 bar.classList.add('active');
+                // Add pulse effect
+                bar.style.animation = 'volumePulse 0.3s ease-in-out';
             } else {
                 bar.classList.remove('active');
+                bar.style.animation = '';
             }
         });
+        
+        // Show volume level feedback
+        this.showVolumeNotification(level);
         
         // Update actual audio volume if playing
         if (this.audioContext && this.musicEnabled) {
             // Volume will be applied to next note
+        }
+    }
+    
+    showVolumeNotification(level) {
+        // Remove existing notification
+        const existing = document.querySelector('.volume-notification');
+        if (existing) existing.remove();
+        
+        // Create volume notification
+        const notification = document.createElement('div');
+        notification.className = 'volume-notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 10000;
+            border-radius: 5px;
+            animation: volumeFade 1s ease-out forwards;
+        `;
+        
+        const volumeIcons = ['🔇', '🔉', '🔊', '📢'];
+        const iconIndex = Math.min(3, Math.floor(level / 3));
+        notification.textContent = `${volumeIcons[iconIndex]} Volume: ${level}/10`;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after animation
+        setTimeout(() => {
+            if (notification.parentElement) notification.remove();
+        }, 1000);
+        
+        // Add CSS animation if not exists
+        if (!document.querySelector('#volume-notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'volume-notification-styles';
+            style.textContent = `
+                @keyframes volumeFade {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+                }
+            `;
+            document.head.appendChild(style);
         }
     }
     

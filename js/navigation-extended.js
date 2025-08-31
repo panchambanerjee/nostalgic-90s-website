@@ -198,14 +198,14 @@ class ExtendedNavContent {
             </center>
             
             <div id="photo-gallery-container">
-                <table width="100%" border="2" cellpadding="15" bgcolor="#FFFFCC" id="photos-table">
+                <table width="100%" border="2" cellpadding="10" bgcolor="#FFFFCC" id="photos-table" style="table-layout: fixed;">
         `;
         
         photos.forEach((photo, index) => {
             if (index % 2 === 0) photosHTML += '<tr>';
             
             photosHTML += `
-                <td align="left" bgcolor="#FFFFFF" width="50%" class="photo-cell" data-category="${photo.category}" style="padding: 15px; vertical-align: top;">
+                <td align="center" bgcolor="#FFFFFF" width="50%" class="photo-cell" data-category="${photo.category}" style="padding: 10px; vertical-align: top;">
                     <div class="photo-container" onclick="ExtendedNavContent.showEnhancedPhoto('${photo.file}', '${photo.name}', '${photo.description}', '${photo.camera}', '${photo.date}')" style="cursor: pointer;">
                         <div class="film-frame" style="
                             background: linear-gradient(45deg, #2F4F4F, #696969);
@@ -213,7 +213,10 @@ class ExtendedNavContent {
                             border-radius: 5px;
                             box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
                             position: relative;
-                            display: inline-block;
+                            display: block;
+                            width: 100%;
+                            max-width: 280px;
+                            margin: 0 auto;
                         ">
                             <!-- Film strip holes -->
                             <div style="
@@ -386,12 +389,19 @@ class ExtendedNavContent {
                 
                 .photo-cell {
                     width: 50% !important;
-                    text-align: left !important;
+                    text-align: center !important;
                     vertical-align: top !important;
                 }
                 
                 .film-frame {
                     margin: 0 auto 10px auto;
+                    display: block;
+                    width: 100%;
+                    max-width: 280px;
+                }
+                
+                .photo-container {
+                    width: 100%;
                     display: block;
                 }
                 
@@ -642,38 +652,45 @@ class ExtendedNavContent {
                     <td>
                         <h2><font color="#FF0000">🎮 Awesome Games! 🎮</font></h2>
                         <ul>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Shockwave Games Central')">🔥 Shockwave Games Central</a> <span class="blink" style="color: #FF0000; font-size: 10px;">NEW!</span></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Flash Game Paradise')">⚡ Flash Game Paradise</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Java Applet Central')">☕ Java Applet Central</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Pogo.com')">🎯 Pogo.com - Free Online Games</a></li>
+                            <li><a href="http://www.shockwave.com/games" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Shockwave Games Central')">🔥 Shockwave Games Central</a> <span class="blink" style="color: #FF0000; font-size: 10px;">NEW!</span></li>
+                            <li><a href="http://www.flashgames.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Flash Game Paradise')">⚡ Flash Game Paradise</a></li>
+                            <li><a href="http://www.javaworld.com/games" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Java Applet Central')">☕ Java Applet Central</a></li>
+                            <li><a href="http://www.pogo.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Pogo.com')">🎯 Pogo.com - Free Online Games</a></li>
+                            <li><a href="http://www.gamespot.com/pc" target="_blank" onclick="ExtendedNavContent.showBrokenLink('GameSpot PC Games')">🕹️ GameSpot PC Games Section</a></li>
+                            <li><a href="http://www.happypuppy.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Happy Puppy Games')">🐶 Happy Puppy Games</a></li>
                         </ul>
                         
                         <h2><font color="#0000FF">😂 Funny Stuff 😂</font></h2>
                         <ul>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('The Hamster Dance')">🐹 The Hamster Dance</a> <span class="blink" style="color: #FF0000;">HOT!</span></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('All Your Base')">👾 All Your Base Are Belong To Us</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Dancing Baby Central')">👶 Dancing Baby Central</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Bert is Evil')">😈 Bert is Evil</a></li>
+                            <li><a href="http://www.hamsterdance.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('The Hamster Dance')">🐹 The Hamster Dance</a> <span class="blink" style="color: #FF0000;">HOT!</span></li>
+                            <li><a href="http://www.allyourbase.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('All Your Base')">👾 All Your Base Are Belong To Us</a></li>
+                            <li><a href="http://www.dancingbaby.net" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Dancing Baby Central')">👶 Dancing Baby Central</a></li>
+                            <li><a href="http://www.bertisevil.tv" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Bert is Evil')">😈 Bert is Evil</a></li>
+                            <li><a href="http://www.zombo.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Zombocom')">🧟‍♂️ Welcome to ZOMBOCOM!</a> <span class="blink" style="color: #FF0000; font-size: 10px;">AMAZING!</span></li>
+                            <li><a href="http://www.goatse.cx" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Goatse (WARNING!)')">🚫 [WARNING: Do NOT Click!]</a></li>
                         </ul>
                         
                         <h2><font color="#006400">👥 My Friends' Pages 👥</font></h2>
                         <ul>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Sarah\\'s Page')">💕 Sarah's Awesome Homepage</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Mike\\'s Site')">🏀 Mike's Basketball Page</a> <span class="blink" style="color: #FF0000; font-size: 10px;">NEW!</span></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Jenny\\'s World')">🌸 Jenny's Pink Palace</a></li>
-                            <li><a href="#" onclick="ExtendedNavContent.showBrokenLink('Chris\\'s Gaming')">🎮 Chris's Gaming Corner</a></li>
+                            <li><a href="http://www.geocities.com/sarah99" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Sarah\'s Page')">💕 Sarah's Awesome Homepage</a></li>
+                            <li><a href="http://www.angelfire.com/mike_bball" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Mike\'s Site')">🏀 Mike's Basketball Page</a> <span class="blink" style="color: #FF0000; font-size: 10px;">NEW!</span></li>
+                            <li><a href="http://www.tripod.com/jenny_pink" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Jenny\'s World')">🌸 Jenny's Pink Palace</a></li>
+                            <li><a href="http://www.fortunecity.com/chris_games" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Chris\'s Gaming')">🎮 Chris's Gaming Corner</a></li>
+                            <li><a href="http://www.geocities.com/siliconvalley/alex" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Alex\'s Tech Hub')">💻 Alex's Computer Lab</a></li>
+                            <li><a href="http://www.xoom.com/music_lover_99" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Music Lover 99')">🎵 My MP3 Collection</a></li>
+                            <li><a href="http://www.homestead.com/skateboard_dude" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Skateboard Dude')"> катал Tony's Skateboard Tricks</a></li>
                         </ul>
                         
                         <h2><font color="#800080">🔗 Link Exchanges 🔗</font></h2>
                         <center>
                             <table border="1" cellpadding="5" bgcolor="#FFFFFF">
                                 <tr>
-                                    <td><a href="#" onclick="ExtendedNavContent.showBrokenLink('Teen Central')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #FF69B4, #FF1493); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Teen Central</div></a></td>
-                                    <td><a href="#" onclick="ExtendedNavContent.showBrokenLink('Cool Site of the Day')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #00BFFF, #0080FF); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Cool Site</div></a></td>
+                                    <td><a href="http://www.teenchat.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Teen Central')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #FF69B4, #FF1493); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Teen Central</div></a></td>
+                                    <td><a href="http://www.coolsite.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Cool Site of the Day')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #00BFFF, #0080FF); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Cool Site</div></a></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="#" onclick="ExtendedNavContent.showBrokenLink('Geocities Ring')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #32CD32, #00FF00); color: black; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Geocities</div></a></td>
-                                    <td><a href="#" onclick="ExtendedNavContent.showBrokenLink('Angelfire Sites')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #FF4500, #FF6347); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Angelfire</div></a></td>
+                                    <td><a href="http://www.geocities.com/ring" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Geocities Ring')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #32CD32, #00FF00); color: black; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Geocities</div></a></td>
+                                    <td><a href="http://www.angelfire.lycos.com" target="_blank" onclick="ExtendedNavContent.showBrokenLink('Angelfire Sites')"><div style="width: 88px; height: 31px; background: linear-gradient(45deg, #FF4500, #FF6347); color: white; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1px outset #C0C0C0;">Angelfire</div></a></td>
                                 </tr>
                             </table>
                         </center>
@@ -748,74 +765,42 @@ class ExtendedNavContent {
     
 
     
-    static getGuestbookContent() {
+
+    
+    static getDownloadsContent() {
+        // Ensure download center is available
+        if (typeof window.downloadCenter === 'undefined') {
+            window.downloadCenter = new DownloadCenter();
+        }
+        
         return `
             <center>
-                <h1><font color="#FF00FF" face="Comic Sans MS">📖 Tom's Cyber Guestbook 📖</font></h1>
+                <h1><font color="#FF00FF" face="Comic Sans MS">💾 Ultimate Downloads 💾</font></h1>
                 <div class="rainbow-divider"></div>
-                <p><font color="#0000FF" size="3">Sign my guestbook and join the cyber community!</font></p>
-                
-                <!-- Friendship Request System -->
-                <table border="2" cellpadding="8" bgcolor="#FFCCFF" style="margin: 10px auto;">
-                    <tr>
-                        <td align="center">
-                            <font face="Arial" size="2" color="#800080">
-                                <b>💖 CYBER FRIENDSHIP ZONE 💖</b><br>
-                                <div style="margin: 10px 0;">
-                                    <button onclick="window.guestbookSystem.sendFriendRequest()" style="
-                                        background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-                                        border: 2px outset #FF69B4;
-                                        color: #000080;
-                                        font-weight: bold;
-                                        padding: 5px 10px;
-                                        cursor: pointer;
-                                        font-size: 10px;
-                                    ">🤝 Send Friend Request</button>
-                                    <button onclick="window.guestbookSystem.showFriendsList()" style="
-                                        background: linear-gradient(45deg, #98FB98, #90EE90);
-                                        border: 2px outset #98FB98;
-                                        color: #006400;
-                                        font-weight: bold;
-                                        padding: 5px 10px;
-                                        cursor: pointer;
-                                        font-size: 10px;
-                                        margin-left: 5px;
-                                    ">👥 My Cyber Friends (${Math.floor(Math.random() * 50) + 10})</button>
-                                </div>
-                                <div style="font-size: 8px; color: #666;">
-                                    Join Tom's exclusive friend network!<br>
-                                    Currently ${Math.floor(Math.random() * 200) + 50} members worldwide!
-                                </div>
-                            </font>
-                        </td>
-                    </tr>
-                </table>
-                
-                <!-- Enhanced Guestbook Stats -->
-                <table border="2" cellpadding="5" bgcolor="#E0FFE0" style="margin: 10px auto;">
+                <p><font color="#0000FF" size="3">Premium shareware & freeware collection! Updated daily!</font></p>
+            </center>
+            
+            ${window.downloadCenter.getDownloadContent()}
+            
+            <center>
+                <table border="2" cellpadding="8" bgcolor="#E0FFE0" style="margin: 15px 0;">
                     <tr>
                         <td align="center">
                             <font face="Arial" size="1" color="#008000">
-                                <b>📊 GUESTBOOK STATS 📊</b><br>
-                                <div style="font-size: 9px; line-height: 1.3;">
-                                    Total Entries: ${Math.floor(Math.random() * 500) + 200}<br>
-                                    This Month: ${Math.floor(Math.random() * 50) + 20}<br>
-                                    Today: ${Math.floor(Math.random() * 10) + 2}<br>
-                                    <span style="color: #FF0000;">🔥 Trending Page!</span>
+                                <b>🔒 SECURITY NOTICE 🔒</b><br>
+                                <div style="text-align: left; font-size: 9px; line-height: 1.3; margin-top: 5px;">
+                                    • All files scanned with McAfee VirusScan 4.0<br>
+                                    • Download only from trusted sources<br>
+                                    • Create restore point before installing<br>
+                                    • Read license agreements carefully<br>
+                                    • Support shareware authors - register!<br>
+                                    • Keep original installation files
                                 </div>
                             </font>
                         </td>
                     </tr>
                 </table>
             </center>
-            
-            <div id="guestbook-container">
-                <center>
-                    <div class="construction-worker"></div>
-                    <br>
-                    <font color="#FF0000">Loading enhanced guestbook system...</font>
-                </center>
-            </div>
         `;
     }
     
@@ -843,8 +828,6 @@ if (window.ninetyNineNav) {
     Object.assign(window.ninetyNineNav.__proto__, {
         getPhotosContent: ExtendedNavContent.getPhotosContent,
         getLinksContent: ExtendedNavContent.getLinksContent,
-
-        getGuestbookContent: ExtendedNavContent.getGuestbookContent,
         getChatContent: ExtendedNavContent.getChatContent
     });
 }

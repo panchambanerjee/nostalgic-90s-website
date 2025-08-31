@@ -2,16 +2,16 @@
 class DialupSimulator {
     constructor() {
         this.connectionSteps = [
-            { text: "Initializing modem...", delay: 400 },
-            { text: "Dialing 555-CYBER...", delay: 600 },
-            { text: "ATDT5558423737", delay: 300 },
-            { text: "♪♫ EEEEEE-AWWWWW-EEEEEE-AWWWWW ♫♪", delay: 800 },
-            { text: "CONNECT 28800", delay: 400 },
-            { text: "Negotiating protocols...", delay: 300 },
-            { text: "Authenticating user...", delay: 400 },
-            { text: "Loading TCP/IP stack...", delay: 200 },
-            { text: "Establishing PPP connection...", delay: 300 },
-            { text: "Connected successfully!", delay: 200 }
+            { text: "Initializing modem...", delay: 200 },
+            { text: "Dialing 555-CYBER...", delay: 300 },
+            { text: "ATDT5558423737", delay: 150 },
+            { text: "♪♫ EEEEEE-AWWWWW-EEEEEE-AWWWWW ♫♪", delay: 400 },
+            { text: "CONNECT 28800", delay: 200 },
+            { text: "Negotiating protocols...", delay: 150 },
+            { text: "Authenticating user...", delay: 200 },
+            { text: "Loading TCP/IP stack...", delay: 100 },
+            { text: "Establishing PPP connection...", delay: 150 },
+            { text: "Connected successfully!", delay: 100 }
         ];
         
         this.currentStep = 0;
@@ -76,7 +76,7 @@ class DialupSimulator {
         }
         
         // Connection complete
-        await this.wait(400);
+        await this.wait(200);
         this.fadeToMainSite();
     }
     
@@ -347,7 +347,7 @@ class DialupSimulator {
         
         setTimeout(() => {
             // Fade out dial-up screen
-            this.dialupScreen.style.transition = 'opacity 1s ease-out';
+            this.dialupScreen.style.transition = 'opacity 0.8s ease-out';
             this.dialupScreen.style.opacity = '0';
             
             setTimeout(() => {
@@ -358,8 +358,8 @@ class DialupSimulator {
                 if (window.initializeMainSite) {
                     window.initializeMainSite();
                 }
-            }, 1000);
-        }, 800);
+            }, 800);
+        }, 400);
     }
     
     wait(ms) {

@@ -20,6 +20,9 @@ class EasterEggs {
         ];
         this.popupBlockerCount = Math.floor(Math.random() * 50) + 25;
         this.initializeEasterEggs();
+        this.setupSecretPages();
+        this.setupNostalgicGameReferences();
+        this.setupHiddenFeatures();
     }
     
     initializeEasterEggs() {
@@ -457,6 +460,474 @@ class EasterEggs {
         
         element.style.cursor = 'grab';
     }
+    
+    setupSecretPages() {
+        // Secret page accessible via typing 'matrix' anywhere on the page
+        let secretSequence = '';
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            secretSequence += e.key.toLowerCase();
+            secretSequence = secretSequence.slice(-6); // Keep last 6 characters
+            
+            if (secretSequence === 'matrix') {
+                this.openMatrixPage();
+            } else if (secretSequence === 'secret') {
+                this.openSecretPage();
+            } else if (secretSequence === 'games') {
+                this.openRetroGamesPage();
+            }
+        });
+    }
+    
+    openMatrixPage() {
+        const matrixPage = document.createElement('div');
+        matrixPage.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            z-index: 10000;
+            padding: 20px;
+            overflow-y: auto;
+        `;
+        
+        matrixPage.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h1 style="color: #00FF00; text-shadow: 0 0 10px #00FF00;">🔒 THE MATRIX 🔒</h1>
+                <p>Welcome to the real world, Neo...</p>
+            </div>
+            
+            <div style="border: 1px solid #00FF00; padding: 15px; margin: 20px 0; background: rgba(0,255,0,0.1);">
+                <h3>💊 Take the Red Pill 💊</h3>
+                <p>You've discovered the hidden Matrix page! This secret area contains:</p>
+                <ul>
+                    <li>🔓 Developer console access</li>
+                    <li>📱 Morpheus chatbot</li>
+                    <li>🎮 Hidden mini-games</li>
+                    <li>📜 Secret cheat codes</li>
+                </ul>
+            </div>
+            
+            <div style="border: 1px solid #00FF00; padding: 15px; margin: 20px 0; background: rgba(0,255,0,0.1);">
+                <h3>🎮 Matrix Terminal</h3>
+                <div id="matrix-terminal" style="background: #000; border: 1px solid #00FF00; padding: 10px; height: 200px; overflow-y: auto;">
+                    <div style="color: #00FF00;">Matrix OS v1.0.1999 - Terminal Ready</div>
+                    <div style="color: #00FF00;">Type 'help' for available commands...</div>
+                    <div style="color: #FFFF00;">matrix@system:~$ <span id="terminal-cursor" style="animation: blink 1s infinite;">_</span></div>
+                </div>
+                <input type="text" id="matrix-input" style="width: 100%; background: transparent; border: none; color: #00FF00; margin-top: 10px;" placeholder="Enter command...">
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="this.parentElement.remove()" style="
+                    background: linear-gradient(45deg, #FF0000, #000000);
+                    color: #FFFFFF;
+                    border: 2px solid #FF0000;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    text-shadow: 0 0 5px #FF0000;
+                ">🚪 Exit Matrix</button>
+            </div>
+        `;
+        
+        document.body.appendChild(matrixPage);
+        this.setupMatrixTerminal();
+    }
+    
+    setupMatrixTerminal() {
+        const input = document.getElementById('matrix-input');
+        const terminal = document.getElementById('matrix-terminal');
+        
+        const commands = {
+            'help': 'Available commands: help, whoami, ls, cat, hack, exit',
+            'whoami': 'You are: The One (Level 1337 Hacker)',
+            'ls': 'red_pill.exe  blue_pill.exe  zion.dat  neo.txt  trinity.log',
+            'cat neo.txt': 'There is no spoon. The Matrix has you. Follow the white rabbit.',
+            'hack': 'Accessing mainframe... [████████████] 100% - Access Granted!',
+            'exit': 'Goodbye, Neo. Remember... there is no spoon.'
+        };
+        
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = input.value.trim().toLowerCase();
+                const response = commands[command] || `Command not found: ${command}`;
+                
+                terminal.innerHTML += `<div style="color: #FFFF00;">matrix@system:~$ ${input.value}</div>`;
+                terminal.innerHTML += `<div style="color: #00FF00;">${response}</div>`;
+                terminal.innerHTML += `<div style="color: #FFFF00;">matrix@system:~$ <span id="terminal-cursor" style="animation: blink 1s infinite;">_</span></div>`;
+                
+                input.value = '';
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                if (command === 'exit') {
+                    setTimeout(() => {
+                        document.querySelector('[style*="Matrix OS"]').parentElement.remove();
+                    }, 2000);
+                }
+            }
+        });
+        
+        setTimeout(() => input.focus(), 100);
+    }
+    
+    openSecretPage() {
+        const secretPage = document.createElement('div');
+        secretPage.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #8A2BE2, #4B0082);
+            color: #FFFF00;
+            font-family: 'Comic Sans MS', cursive;
+            z-index: 10000;
+            padding: 20px;
+            overflow-y: auto;
+            text-align: center;
+        `;
+        
+        secretPage.innerHTML = `
+            <h1 style="color: #FFFF00; text-shadow: 3px 3px 0px #FF00FF;">🎯 SECRET AREA UNLOCKED! 🎯</h1>
+            <p style="font-size: 18px;">Congratulations! You found the hidden page!</p>
+            
+            <div style="background: rgba(255,255,255,0.2); border: 3px ridge #FFFF00; padding: 20px; margin: 20px auto; max-width: 600px;">
+                <h2>🕹️ Secret Features Unlocked:</h2>
+                <ul style="text-align: left; font-size: 14px;">
+                    <li>🎮 Snake Game (type 'snake' anywhere)</li>
+                    <li>🔄 Time Portal (triple-click the date)</li>
+                    <li>🎨 Color Changer (Ctrl+Shift+C)</li>
+                    <li>👾 Invaders Mode (type 'invaders')</li>
+                    <li>🌈 Rainbow Mode (Alt+R)</li>
+                    <li>💫 Psychedelic Mode (type 'trippy')</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(0,0,0,0.5); border: 2px solid #00FF00; padding: 15px; margin: 20px auto; max-width: 500px;">
+                <h3>🔐 Elite Hacker Status Achieved!</h3>
+                <p>You are now part of the secret CyberKids underground!</p>
+                <p style="font-family: monospace; color: #00FF00;">Access Level: MAXIMUM</p>
+                <p style="font-family: monospace; color: #00FF00;">Clearance: ULTRA</p>
+            </div>
+            
+            <button onclick="this.parentElement.remove()" style="
+                background: linear-gradient(45deg, #FF1493, #8A2BE2);
+                color: white;
+                border: 3px outset #FF1493;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 14px;
+                margin-top: 20px;
+            ">🚪 Return to Normal Reality</button>
+        `;
+        
+        document.body.appendChild(secretPage);
+    }
+    
+    openRetroGamesPage() {
+        const gamesPage = document.createElement('div');
+        gamesPage.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000080;
+            color: #FFFF00;
+            font-family: 'Courier New', monospace;
+            z-index: 10000;
+            padding: 20px;
+            overflow-y: auto;
+        `;
+        
+        gamesPage.innerHTML = `
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="color: #FFFF00; text-shadow: 2px 2px 0px #FF0000;">🕹️ RETRO ARCADE 1999 🕹️</h1>
+                <p style="font-size: 16px;">Welcome to the underground gaming vault!</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div onclick="window.easterEggs.startSnakeGame()" style="
+                    background: linear-gradient(45deg, #00FF00, #008000);
+                    color: #000;
+                    padding: 20px;
+                    border: 3px outset #00FF00;
+                    cursor: pointer;
+                    text-align: center;
+                    font-weight: bold;
+                ">
+                    <h3>🐍 SNAKE GAME</h3>
+                    <p>Classic Nokia-style Snake! Eat the dots, don't hit the walls!</p>
+                    <p style="font-size: 12px;">Controls: Arrow Keys</p>
+                </div>
+                
+                <div onclick="window.easterEggs.startPongGame()" style="
+                    background: linear-gradient(45deg, #FF6600, #CC3300);
+                    color: #FFF;
+                    padding: 20px;
+                    border: 3px outset #FF6600;
+                    cursor: pointer;
+                    text-align: center;
+                    font-weight: bold;
+                ">
+                    <h3>🏓 CYBER PONG</h3>
+                    <p>The classic paddle game that started it all!</p>
+                    <p style="font-size: 12px;">Controls: W/S Keys</p>
+                </div>
+                
+                <div onclick="window.easterEggs.startTetrisGame()" style="
+                    background: linear-gradient(45deg, #8A2BE2, #4B0082);
+                    color: #FFF;
+                    padding: 20px;
+                    border: 3px outset #8A2BE2;
+                    cursor: pointer;
+                    text-align: center;
+                    font-weight: bold;
+                ">
+                    <h3>🧱 CYBER BLOCKS</h3>
+                    <p>Stack those blocks like it's 1984!</p>
+                    <p style="font-size: 12px;">Controls: Arrow Keys + Space</p>
+                </div>
+                
+                <div onclick="window.easterEggs.startInvadersGame()" style="
+                    background: linear-gradient(45deg, #FF1493, #8B008B);
+                    color: #FFF;
+                    padding: 20px;
+                    border: 3px outset #FF1493;
+                    cursor: pointer;
+                    text-align: center;
+                    font-weight: bold;
+                ">
+                    <h3>👾 SPACE INVADERS</h3>
+                    <p>Defend Earth from the pixel invasion!</p>
+                    <p style="font-size: 12px;">Controls: A/D + Spacebar</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="color: #00FFFF;">💰 High Scores saved to localStorage!</p>
+                <p style="color: #00FFFF;">🏆 Compete with other CyberKids worldwide!</p>
+                <button onclick="this.parentElement.remove()" style="
+                    background: linear-gradient(45deg, #FF0000, #800000);
+                    color: white;
+                    border: 3px outset #FF0000;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    margin-top: 20px;
+                ">🚪 Exit Arcade</button>
+            </div>
+        `;
+        
+        document.body.appendChild(gamesPage);
+    }
+    
+    setupNostalgicGameReferences() {
+        // Add game launcher shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            // Snake game shortcut
+            if (e.key.toLowerCase() === 's' && e.ctrlKey && e.shiftKey) {
+                e.preventDefault();
+                this.startSnakeGame();
+            }
+            
+            // Color changer
+            if (e.key.toLowerCase() === 'c' && e.ctrlKey && e.shiftKey) {
+                e.preventDefault();
+                this.toggleColorMode();
+            }
+            
+            // Rainbow mode
+            if (e.key.toLowerCase() === 'r' && e.altKey) {
+                e.preventDefault();
+                this.toggleRainbowMode();
+            }
+        });
+        
+        // Secret game access via typing
+        let gameSequence = '';
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            gameSequence += e.key.toLowerCase();
+            gameSequence = gameSequence.slice(-8);
+            
+            if (gameSequence.includes('snake')) {
+                this.startSnakeGame();
+                gameSequence = '';
+            } else if (gameSequence.includes('invaders')) {
+                this.startInvadersGame();
+                gameSequence = '';
+            } else if (gameSequence.includes('trippy')) {
+                this.startPsychedelicMode();
+                gameSequence = '';
+            }
+        });
+    }
+    
+    setupHiddenFeatures() {
+        // Time portal (triple-click date)
+        let clickCount = 0;
+        document.addEventListener('click', (e) => {
+            if (e.target.textContent && e.target.textContent.includes('1999')) {
+                clickCount++;
+                if (clickCount >= 3) {
+                    this.openTimePortal();
+                    clickCount = 0;
+                }
+                setTimeout(() => { clickCount = 0; }, 2000);
+            }
+        });
+        
+        // Secret admin panel (type 'admin' + Enter)
+        let adminSequence = '';
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            if (e.key === 'Enter' && adminSequence === 'admin') {
+                this.openAdminPanel();
+                adminSequence = '';
+            } else if (e.key.length === 1) {
+                adminSequence += e.key.toLowerCase();
+                adminSequence = adminSequence.slice(-5);
+            }
+        });
+    }
+    
+    startSnakeGame() {
+        alert('🐍 Snake Game Loading...\n\nJust kidding! This would launch a full Snake game.\n\nIn a real implementation, this would open a canvas-based Snake game!\n\n🎮 Use arrow keys to control the snake!');
+    }
+    
+    startPongGame() {
+        alert('🏓 Cyber Pong Loading...\n\nThis would launch the classic Pong game!\n\n🎮 Use W/S keys to control your paddle!');
+    }
+    
+    startTetrisGame() {
+        alert('🧱 Cyber Blocks Loading...\n\nThis would launch a Tetris-style game!\n\n🎮 Use arrow keys to rotate and move blocks!');
+    }
+    
+    startInvadersGame() {
+        alert('👾 Space Invaders Loading...\n\nThis would launch the classic Space Invaders!\n\n🎮 Use A/D to move, Spacebar to shoot!');
+    }
+    
+    toggleColorMode() {
+        const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = randomColor;
+        
+        setTimeout(() => {
+            document.body.style.backgroundColor = '';
+        }, 3000);
+        
+        alert('🎨 Color Mode Activated!\n\nBackground color temporarily changed!\n\nPress Ctrl+Shift+C again for a new color!');
+    }
+    
+    toggleRainbowMode() {
+        const rainbowDiv = document.createElement('div');
+        rainbowDiv.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+            background-size: 400% 400%;
+            animation: rainbow-dance 2s ease infinite;
+            pointer-events: none;
+            z-index: 5000;
+            opacity: 0.3;
+        `;
+        
+        document.body.appendChild(rainbowDiv);
+        
+        setTimeout(() => {
+            if (rainbowDiv.parentElement) rainbowDiv.remove();
+        }, 5000);
+    }
+    
+    startPsychedelicMode() {
+        document.body.style.animation = 'psychedelic-spin 3s ease-in-out';
+        document.body.style.filter = 'hue-rotate(180deg) saturate(200%)';
+        
+        setTimeout(() => {
+            document.body.style.animation = '';
+            document.body.style.filter = '';
+        }, 3000);
+        
+        alert('🌈 TRIPPY MODE ACTIVATED! 🌈\n\nWhoa dude... the colors, man!\n\n😵‍💫 Reality is temporarily altered!');
+    }
+    
+    openTimePortal() {
+        alert('⏰ TIME PORTAL ACTIVATED! ⏰\n\nYou\'ve discovered the secret time travel feature!\n\n🌀 This would normally transport you to different eras of the internet!\n\n📅 Choose your destination: 1995, 1997, 1999, 2001');
+    }
+    
+    openAdminPanel() {
+        const adminPanel = document.createElement('div');
+        adminPanel.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #C0C0C0;
+            border: 4px outset #C0C0C0;
+            width: 500px;
+            height: 400px;
+            z-index: 10001;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+        `;
+        
+        adminPanel.innerHTML = `
+            <div style="background: linear-gradient(90deg, #000080, #0000FF); color: white; padding: 5px; display: flex; justify-content: space-between; align-items: center;">
+                <b>🔧 CyberKids Admin Panel v1.0</b>
+                <button onclick="this.parentElement.parentElement.remove()" style="background: #FF0000; color: white; border: none; width: 16px; height: 14px; font-size: 9px;">×</button>
+            </div>
+            
+            <div style="padding: 15px;">
+                <div style="border: 2px inset #C0C0C0; padding: 10px; margin-bottom: 10px; background: white;">
+                    <h4 style="margin: 0 0 10px 0; color: #000080;">📊 Site Statistics</h4>
+                    <div style="font-size: 10px; line-height: 1.4;">
+                        • Total Visitors: ${localStorage.getItem('hitCounter') || '1337'}<br>
+                        • Pages Served: ${Math.floor(Math.random() * 50000) + 10000}<br>
+                        • Bandwidth Used: ${(Math.random() * 100 + 50).toFixed(1)} MB<br>
+                        • Server Uptime: 99.7%<br>
+                        • Last Backup: Dec 30, 1999
+                    </div>
+                </div>
+                
+                <div style="border: 2px inset #C0C0C0; padding: 10px; margin-bottom: 10px; background: white;">
+                    <h4 style="margin: 0 0 10px 0; color: #000080;">🛠️ Quick Actions</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        <button onclick="alert('Visitor counter reset!')" style="padding: 5px; font-size: 9px;">Reset Counter</button>
+                        <button onclick="alert('Site backed up!')" style="padding: 5px; font-size: 9px;">Backup Site</button>
+                        <button onclick="alert('Cache cleared!')" style="padding: 5px; font-size: 9px;">Clear Cache</button>
+                        <button onclick="alert('Logs exported!')" style="padding: 5px; font-size: 9px;">Export Logs</button>
+                    </div>
+                </div>
+                
+                <div style="border: 2px inset #C0C0C0; padding: 10px; background: white;">
+                    <h4 style="margin: 0 0 10px 0; color: #000080;">⚠️ System Status</h4>
+                    <div style="font-size: 10px; color: #008000;">
+                        ✅ All systems operational<br>
+                        ✅ Database connection: OK<br>
+                        ✅ Y2K compliance: READY<br>
+                        ⚠️ GeoCities quota: 89% used
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(adminPanel);
+    }
 }
 
 // Add CSS animations for new effects
@@ -475,6 +946,25 @@ style.textContent = `
     @keyframes pulse {
         0% { transform: translate(-50%, -50%) scale(1); }
         100% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+    
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+    
+    @keyframes rainbow-dance {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes psychedelic-spin {
+        0% { transform: rotate(0deg) scale(1); filter: hue-rotate(0deg); }
+        25% { transform: rotate(90deg) scale(1.1); filter: hue-rotate(90deg); }
+        50% { transform: rotate(180deg) scale(1); filter: hue-rotate(180deg); }
+        75% { transform: rotate(270deg) scale(1.1); filter: hue-rotate(270deg); }
+        100% { transform: rotate(360deg) scale(1); filter: hue-rotate(360deg); }
     }
 `;
 document.head.appendChild(style);

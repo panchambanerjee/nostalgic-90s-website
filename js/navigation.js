@@ -146,10 +146,6 @@ class NinetyNineNavigation {
                 return this.getPhotosContent();
             case 'links':
                 return this.getLinksContent();
-            case 'guestbook':
-                return this.getGuestbookContent();
-            case 'chat':
-                return this.getChatContent();
             default:
                 return this.getHomeContent();
         }
@@ -437,14 +433,7 @@ class NinetyNineNavigation {
     getLinksContent() {
         return ExtendedNavContent.getLinksContent();
     }
-    
-    getGuestbookContent() {
-        return ExtendedNavContent.getGuestbookContent();
-    }
-    
-    getChatContent() {
-        return ExtendedNavContent.getChatContent();
-    }
+
     
     initializePageFeatures(pageName) {
         // Re-initialize features when switching pages
@@ -453,20 +442,10 @@ class NinetyNineNavigation {
             if (window.initializeFeatures) {
                 setTimeout(() => window.initializeFeatures(), 100);
             }
-        } else if (pageName === 'guestbook') {
-            // Reinit guestbook
-            if (window.initializeGuestbook) {
-                setTimeout(() => window.initializeGuestbook(), 100);
-            }
         } else if (pageName === 'photos') {
             // Reinit photo gallery
             if (window.initializePhotoGallery) {
                 setTimeout(() => window.initializePhotoGallery(), 100);
-            }
-        } else if (pageName === 'chat') {
-            // Reinit chatroom
-            if (window.initializeChatroom) {
-                setTimeout(() => window.initializeChatroom(), 100);
             }
         }
     }
@@ -512,12 +491,6 @@ window.navigateToPage = function(pageName) {
                     break;
                 case 'links':
                     pageContent = getLinksContentDirect();
-                    break;
-                case 'guestbook':
-                    pageContent = getGuestbookContentDirect();
-                    break;
-                case 'chat':
-                    pageContent = getChatContentDirect();
                     break;
                 default:
                     pageContent = getHomeContentDirect();
@@ -994,9 +967,7 @@ function getLinksContentDirect() {
     return window.ExtendedNavContent ? ExtendedNavContent.getLinksContent() : '<center><h1>Links Loading...</h1></center>';
 }
 
-function getGuestbookContentDirect() {
-    return window.ExtendedNavContent ? ExtendedNavContent.getGuestbookContent() : '<center><h1>Guestbook Loading...</h1></center>';
-}
+
 
 function getChatContentDirect() {
     return window.ExtendedNavContent ? ExtendedNavContent.getChatContent() : '<center><h1>Chat Loading...</h1></center>';
@@ -1055,12 +1026,6 @@ window.navigateToPage = function(pageName) {
                 break;
             case 'links':
                 pageContent = getLinksContentDirect();
-                break;
-            case 'guestbook':
-                pageContent = getGuestbookContentDirect();
-                break;
-            case 'chat':
-                pageContent = getChatContentDirect();
                 break;
             default:
                 pageContent = getHomeContentDirect();
