@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to CyberSpace 1999 - Connecting to the Information Superhighway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/gifs.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body bgcolor="#000000" text="#00FF00" link="#00FFFF" vlink="#FF00FF" alink="#FFFF00">
+    
+    <!-- Dial-up Connection Screen -->
+    <div id="dialup-screen" class="fullscreen">
+        <div class="dialup-container">
+            <h1 class="retro-title">🌐 CyberSpace Connection Manager v2.1 🌐</h1>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span>● ● ●</span>
+                    <span>Dial-Up Networking</span>
+                </div>
+                <div class="terminal-content">
+                    <div id="connection-log">
+                        <div class="log-line">Initializing modem...</div>
+                        <div class="log-line">Dialing 555-CYBER...</div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill"></div>
+                        </div>
+                        <div id="progress-text">Connecting... 0%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modem-display">
+                <div class="modem-lights">
+                    <span class="light" id="power-light">PWR</span>
+                    <span class="light" id="data-light">DATA</span>
+                    <span class="light" id="conn-light">CONN</span>
+                </div>
+                <div class="speed-display">
+                    <span id="connection-speed">28.8k</span>
+                </div>
+            </div>
+            
+            <button id="connect-btn" class="retro-button">CONNECT TO CYBERSPACE</button>
+        </div>
+    </div>
+    
+    <!-- Main Website Content (Hidden initially) -->
+    <div id="main-content" style="display: none;">
+        <!-- Top Navigation Frame -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#008080">
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="5">
+                        <tr>
+                            <td bgcolor="#FFFF00">
+                                <font face="Comic Sans MS" size="4" color="#FF00FF">
+                                    <b>🌟 Welcome to CyberKid1999's Totally Rad Homepage! 🌟</b>
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Main Content Table Layout -->
+        <table width="100%" border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <!-- Left Navigation Frame -->
+                <td width="200" bgcolor="#C0C0C0" valign="top">
+                    <table width="100%" cellpadding="10">
+                        <tr>
+                            <td>
+                                <font face="Arial" size="2">
+                                    <b>🔗 Navigation 🔗</b><br><br>
+                                    <a href="#home" onclick="navigateToPage('home'); return false;">🏠 Home</a><br>
+                                    <a href="#about" onclick="navigateToPage('about'); return false;">👤 About Me</a><br>
+                                    <a href="#photos" onclick="navigateToPage('photos'); return false;">📷 Photos</a><br>
+                                    <a href="#links" onclick="navigateToPage('links'); return false;">🌐 Cool Links</a><br>
+                                    <a href="#guestbook" onclick="navigateToPage('guestbook'); return false;">📖 Guestbook</a><br>
+                                    <a href="#chat" onclick="navigateToPage('chat'); return false;">💬 Chat Room</a><br><br>
+                                    
+                                    <!-- Hit Counter -->
+                                    <center>
+                                        <table border="2" cellpadding="3" bgcolor="#000000" style="margin: 10px auto;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font color="#00FF00" face="Courier New, monospace" size="2">
+                                                        <b>VISITOR COUNTER</b>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" bgcolor="#330000">
+                                                    <font color="#FF0000" face="Courier New, monospace" size="4" id="hit-counter-display">
+                                                        <b>000000</b>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center">
+                                                    <font color="#FFFF00" face="Arial" size="1">
+                                                        You are visitor #<span id="hit-counter">0</span><br>
+                                                        since Dec 15, 1999
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center><br>
+                                    
+                                    <!-- Enhanced Music Player (WinAmp Style) -->
+                                    <center>
+                                        <div id="winamp-player" style="
+                                            background: linear-gradient(45deg, #C0C0C0, #808080);
+                                            border: 2px outset #C0C0C0;
+                                            padding: 8px;
+                                            margin: 10px 0;
+                                            font-family: Arial, sans-serif;
+                                            font-size: 10px;
+                                            width: 200px;
+                                            box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+                                        ">
+                                            <div style="
+                                                background: #000000;
+                                                color: #00FF00;
+                                                padding: 3px 5px;
+                                                margin-bottom: 5px;
+                                                border: 1px inset #C0C0C0;
+                                                font-family: 'Courier New', monospace;
+                                                text-align: center;
+                                                overflow: hidden;
+                                                white-space: nowrap;
+                                            " id="track-display">
+                                                <marquee id="track-marquee" scrollamount="2">
+                                                    🎵 WinAmp v2.95 - No track selected
+                                                </marquee>
+                                            </div>
+                                            
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 5px 0;">
+                                                <button onclick="window.nostalgicSite.previousTrack()" style="
+                                                    background: #C0C0C0;
+                                                    border: 1px outset #C0C0C0;
+                                                    padding: 2px 6px;
+                                                    cursor: pointer;
+                                                    font-size: 8px;
+                                                ">⏮️</button>
+                                                
+                                                <button onclick="window.nostalgicSite.toggleMusic()" id="play-pause-btn" style="
+                                                    background: linear-gradient(45deg, #FF00FF, #FFFF00);
+                                                    border: 2px outset #C0C0C0;
+                                                    padding: 3px 8px;
+                                                    cursor: pointer;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                ">▶️ PLAY</button>
+                                                
+                                                <button onclick="window.nostalgicSite.nextTrack()" style="
+                                                    background: #C0C0C0;
+                                                    border: 1px outset #C0C0C0;
+                                                    padding: 2px 6px;
+                                                    cursor: pointer;
+                                                    font-size: 8px;
+                                                ">⏭️</button>
+                                            </div>
+                                            
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span style="font-size: 8px;">VOL:</span>
+                                                <div id="volume-bars" style="display: flex; gap: 1px;">
+                                                    <div class="vol-bar active" onclick="window.nostalgicSite.setVolume(1)"></div>
+                                                    <div class="vol-bar active" onclick="window.nostalgicSite.setVolume(2)"></div>
+                                                    <div class="vol-bar active" onclick="window.nostalgicSite.setVolume(3)"></div>
+                                                    <div class="vol-bar active" onclick="window.nostalgicSite.setVolume(4)"></div>
+                                                    <div class="vol-bar active" onclick="window.nostalgicSite.setVolume(5)"></div>
+                                                    <div class="vol-bar" onclick="window.nostalgicSite.setVolume(6)"></div>
+                                                    <div class="vol-bar" onclick="window.nostalgicSite.setVolume(7)"></div>
+                                                    <div class="vol-bar" onclick="window.nostalgicSite.setVolume(8)"></div>
+                                                    <div class="vol-bar" onclick="window.nostalgicSite.setVolume(9)"></div>
+                                                    <div class="vol-bar" onclick="window.nostalgicSite.setVolume(10)"></div>
+                                                </div>
+                                                <button onclick="window.nostalgicSite.showPlaylist()" style="
+                                                    background: #C0C0C0;
+                                                    border: 1px outset #C0C0C0;
+                                                    padding: 1px 4px;
+                                                    cursor: pointer;
+                                                    font-size: 8px;
+                                                ">PL</button>
+                                            </div>
+                                        </div>
+                                    </center><br>
+                                    
+                                    <!-- Virtual Pet Preview -->
+                                    <center>
+                                        <div class="pet-container">
+                                            <div id="mini-pet">🐣</div>
+                                            <div class="pet-status">Cyber Pet</div>
+                                            <button onclick="openPetWindow()" class="pet-btn">Care for Me!</button>
+                                        </div>
+                                    </center><br>
+                                    
+                                    <!-- Online Status Center -->
+                                    <center>
+                                        <table border="2" cellpadding="5" bgcolor="#CCFFCC" style="margin: 10px 0;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font face="Arial" size="1" color="#008000">
+                                                        <b>📡 ONLINE STATUS 📡</b><br>
+                                                        <div style="text-align: left; font-size: 9px; line-height: 1.3;">
+                                                            <div style="color: #0000FF;">🟢 AOL: xXTomFromMySpaceXx</div>
+                                                            <div style="color: #FF0000;">📱 ICQ: 12345678 <blink>[MSG]</blink></div>
+                                                            <div style="color: #800080;">📧 Main: tomfrommyspace@hotmail.com</div>
+                                                            <div style="color: #FF8C00;">📟 Pager: 555-TOM-PAGE</div>
+                                                            <div style="font-size: 8px; color: #666;">💬 Currently: Chillin' online</div>
+                                                        </div>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                    
+                                    <!-- Email Provider Status -->
+                                    <center>
+                                        <table border="2" cellpadding="4" bgcolor="#FFCCFF" style="margin: 10px 0;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font face="Arial" size="1" color="#800080">
+                                                        <b>📬 EMAIL ACCOUNTS 📬</b><br>
+                                                        <div style="text-align: left; font-size: 8px; line-height: 1.2;">
+                                                            <div>📧 Hotmail: 47 new messages!</div>
+                                                            <div>📧 Yahoo: 12 new messages</div>
+                                                            <div>📧 Juno: 3 new messages</div>
+                                                            <div>📧 Excite: 8 new messages</div>
+                                                            <div style="color: #FF0000;"><blink>Total: 70 unread!</blink></div>
+                                                        </div>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                                        
+                                    <!-- Award Badges Section -->
+                                    <center>
+                                        <table border="2" cellpadding="5" bgcolor="#FFE4B5" style="margin: 10px 0;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font face="Arial" size="1" color="#8B4513">
+                                                        <b>🏆 AWARDS & BADGES 🏆</b><br>
+                                                        <div style="display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; margin: 5px 0;">
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #FFD700, #FFA500); color: #000; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 2px outset #FFD700; font-weight: bold;">Cool Site ★</div>
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #32CD32, #00FF32); color: #000; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 2px outset #32CD32; font-weight: bold;">WebRing</div>
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #FF69B4, #FF1493); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 2px outset #FF69B4; font-weight: bold;">Rad Site '99</div>
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #00BFFF, #0080FF); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 7px; border: 2px outset #00BFFF; font-weight: bold;">Pokémon Fan</div>
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #9932CC, #8A2BE2); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 2px outset #9932CC; font-weight: bold;">Y2K Ready</div>
+                                                            <div style="width: 80px; height: 25px; background: linear-gradient(45deg, #DC143C, #B22222); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 2px outset #DC143C; font-weight: bold;">56k Modem</div>
+                                                        </div>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                    
+                                    <!-- AOL Buddy List -->
+                                    <center>
+                                        <table border="2" cellpadding="4" bgcolor="#E0E0FF" style="margin: 10px 0;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font face="Arial" size="1" color="#000080">
+                                                        <b>👥 AOL BUDDY LIST 👥</b><br>
+                                                        <div style="text-align: left; font-size: 8px; line-height: 1.2;">
+                                                            <div>🟢 CyberKid1999 (Online)</div>
+                                                            <div>🟢 StarWarsGeek97 (Online)</div>
+                                                            <div>🔴 PokemonMaster (Away)</div>
+                                                            <div>🟢 MusicLover99 (Online)</div>
+                                                            <div>🔴 GameFreak2000 (Idle)</div>
+                                                            <div style="margin-top: 2px; color: #008000;">5 buddies online</div>
+                                                        </div>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                    
+                                    <!-- 1999 Culture Box -->
+                                    <center>
+                                        <table border="2" cellpadding="5" bgcolor="#FFFFCC" style="margin: 10px 0;">
+                                            <tr>
+                                                <td align="center">
+                                                    <font face="Arial" size="1" color="#FF00FF">
+                                                        <b>🎆 1999 VIBES 🎆</b><br>
+                                                        <div style="text-align: left; font-size: 9px;">
+                                                            • Y2K prep mode: ON<br>
+                                                            • Matrix has us questioning reality<br>
+                                                            • Everyone's got Pokémon fever<br>
+                                                            • Britney is our pop princess<br>
+                                                            • Napster = music revolution<br>
+                                                            • <blink>Who Wants to Be a Millionaire</blink>
+                                                        </div>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
+                <!-- Main Content Area -->
+                <td bgcolor="#FFFFFF" valign="top">
+                    <table width="100%" cellpadding="20">
+                        <tr>
+                            <td class="main-content-area">
+                                <!-- Marquee Welcome -->
+                                <div class="marquee">
+                                    <span class="rainbow-text" style="font-size: 18px;">
+                                        🌟 WELCOME TO THE INFORMATION SUPERHIGHWAY! 🌟 Check out my awesome homepage! 🚀 Don't forget to sign my guestbook! 📝 
+                                    </span>
+                                </div>
+                                
+                                <div class="rainbow-stripe"></div>
+                                
+                                <center>
+                                    <h1><font color="#0000FF" face="Comic Sans MS">Welcome to CyberSpace!</font></h1>
+                                    
+                                    <!-- Classic 90s Animated GIFs -->
+                                    <div style="margin: 20px 0;">
+                                        <span class="spinning-at">@</span>
+                                        <div class="dancing-baby" title="Dancing Baby - The Internet's First Viral Sensation!"></div>
+                                        <span class="new-badge">NEW!</span>
+                                        <div class="construction-worker" title="Under Construction - Check Back Soon!"></div>
+                                        <span class="rotating-skull">☠️</span>
+                                        <div class="spinning-logo" title="Web Site Loading..."></div>
+                                        <span class="spinning-at">@</span>
+                                    </div>
+                                    
+                                    <div style="margin: 15px 0;">
+                                        <div class="fire-gif" title="Hot New Content!"></div>
+                                        <span class="pulsing-heart">❤️</span>
+                                        <div class="bouncing-ball" title="Cool Animation!"></div>
+                                        <span class="spinning-earth">🌍</span>
+                                        <div class="email-gif" title="You've Got Mail!"></div>
+                                        <span class="walking-figure">🚶‍♂️</span>
+                                    </div>
+                                    
+                                    <div class="under-construction">⚠️ UNDER CONSTRUCTION! ⚠️</div>
+                                    
+                                    <div class="retro-loader" title="Loading awesome content..."></div>
+                                    
+                                    <div class="rainbow-stripe thin"></div>
+                                    
+                                    <div class="starfield" title="Journey Through Cyberspace"></div>
+                                </center>
+                                
+                                <p><font face="Times New Roman" size="3">
+                                    <b>Greetings, fellow netizen!</b> You have successfully navigated to my corner of cyberspace! 
+                                    This page is best viewed with Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 resolution.
+                                </font></p>
+                                
+                                <!-- Under Construction -->
+                                <center>
+                                    <div class="construction-worker" style="margin: 10px;"></div>
+                                    <br><font color="#FF0000" class="blink glow-text"><b>UNDER CONSTRUCTION!</b></font>
+                                    <br><font size="2">Last updated: December 31, 1999</font>
+                                </center>
+                                
+                                <hr width="50%" color="#FF00FF">
+                                
+                                <!-- Time Machine Section -->
+                                <center>
+                                    <h3><font color="#FF0000">⚠️ Y2K COUNTDOWN ⚠️</font></h3>
+                                    <div id="y2k-countdown" class="countdown-display">
+                                        <div id="countdown-timer">Loading...</div>
+                                        <div class="countdown-warning">Prepare for the millennium bug!</div>
+                                    </div>
+                                </center>
+                                
+                                <br><br>
+                                
+                                <!-- Webring Navigation -->
+                                <center>
+                                    <table border="2" cellpadding="5" bgcolor="#FFFF00">
+                                        <tr>
+                                            <td align="center">
+                                                <font size="2"><b>🔗 CyberKids WebRing 🔗</b><br>
+                                                [Previous] |
+                                                [Random] |
+                                                [Next]<br>
+                                                Member #1337 of 42,069 sites</font>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Simple GeoCities Footer -->
+        <table width="100%" cellpadding="8" bgcolor="#008080">
+            <tr>
+                <td align="center">
+                    <font color="#FFFFFF" size="2">
+                        <b>🏠 Proudly hosted by GeoCities 🏠</b><br>
+                        <font size="1">
+                            💻 Optimized for Windows 98 💻 🌐 Member of 17 WebRings 🌐<br>
+                            © 1999 - Tom from MySpace
+                        </font>
+                    </font>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="modem-sound" preload="auto">
+        <!-- We'll add modem sound source later -->
+    </audio>
+    
+    <audio id="bg-music" loop>
+        <!-- Background MIDI-style music will go here -->
+    </audio>
+    
+    <script src="js/dialup.js"></script>
+    <script src="js/features.js"></script>
+    <script src="js/visual-effects.js"></script>
+    <script src="js/guestbook.js"></script>
+    <script src="js/photo-gallery.js"></script>
+    <script src="js/chatroom.js"></script>
+    <script src="js/navigation-extended.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/desktop.js"></script>
+    <script src="js/easter-eggs.js"></script>
+    <script src="js/magic-effects.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
