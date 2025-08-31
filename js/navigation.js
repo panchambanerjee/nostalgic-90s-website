@@ -17,15 +17,53 @@ class NinetyNineNavigation {
     }
     
     attachNavigationEvents() {
-        const navLinks = document.querySelectorAll('a[href^="#"]');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = link.getAttribute('href').substring(1);
-                this.navigateToPage(page);
-                this.addRefreshEffect(link);
+        console.log('Attaching navigation events...');
+        
+        // Wait for DOM to be ready and try multiple times if needed
+        const attachEvents = () => {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            console.log('Found navigation links:', navLinks.length);
+            
+            if (navLinks.length === 0) {
+                console.log('No navigation links found, retrying in 500ms...');
+                setTimeout(attachEvents, 500);
+                return;
+            }
+            
+            navLinks.forEach((link, index) => {
+                console.log(`Link ${index}:`, link.href, link.textContent.trim());
+                
+                // Remove any existing event listeners first
+                link.onclick = null;
+                
+                // Add click event listener
+                link.addEventListener('click', (e) => {
+                    console.log('Navigation link clicked:', link.href, link.textContent.trim());
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const page = link.getAttribute('href').substring(1);
+                    console.log('Navigating to page:', page);
+                    
+                    this.navigateToPage(page);
+                    this.addRefreshEffect(link);
+                }, true); // Use capture phase
+                
+                // Also add direct onclick as backup
+                link.onclick = (e) => {
+                    console.log('Direct onclick triggered for:', link.textContent.trim());
+                    e.preventDefault();
+                    const page = link.getAttribute('href').substring(1);
+                    this.navigateToPage(page);
+                    this.addRefreshEffect(link);
+                    return false;
+                };
             });
-        });
+            
+            console.log('Navigation events attached successfully');
+        };
+        
+        attachEvents();
     }
     
     addRefreshEffect(element) {
@@ -56,14 +94,46 @@ class NinetyNineNavigation {
     }
     
     updateMainContent(pageName) {
-        const mainContentArea = document.querySelector('#main-content td[bgcolor="#FFFFFF"] table td');
-        if (!mainContentArea) return;
+        console.log('Updating main content for page:', pageName);
         
-        const pageContent = this.getPageContent(pageName);
-        mainContentArea.innerHTML = pageContent;
+        // Try multiple selectors to find the main content area
+        let mainContentArea = document.querySelector('.main-content-area');
         
-        // Re-initialize features for specific pages
-        this.initializePageFeatures(pageName);
+        if (!mainContentArea) {
+            mainContentArea = document.querySelector('#main-content td[bgcolor="#FFFFFF"] table td');
+        }
+        
+        if (!mainContentArea) {
+            // Find the white background content area in main content
+            const whiteCell = document.querySelector('#main-content td[bgcolor="#FFFFFF"]');
+            if (whiteCell) {
+                mainContentArea = whiteCell.querySelector('td');
+            }
+        }
+        
+        console.log('Main content area found:', !!mainContentArea);
+        
+        if (!mainContentArea) {
+            console.error('Main content area not found! Creating fallback...');
+            // Create a fallback content area
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'main-content-area';
+                fallbackDiv.style.cssText = 'padding: 20px; background: white; margin: 10px;';
+                mainContent.appendChild(fallbackDiv);
+                mainContentArea = fallbackDiv;
+            }
+        }
+        
+        if (mainContentArea) {
+            const pageContent = this.getPageContent(pageName);
+            console.log('Got page content, length:', pageContent.length);
+            mainContentArea.innerHTML = pageContent;
+            
+            // Re-initialize features for specific pages
+            this.initializePageFeatures(pageName);
+        }
     }
     
     getPageContent(pageName) {
@@ -288,5 +358,10 @@ class NinetyNineNavigation {
 
 // Initialize navigation when main site loads
 window.initializeNavigation = function() {
-    window.ninetyNineNav = new NinetyNineNavigation();
+    console.log('Initializing navigation system...');
+    // Wait a bit to ensure DOM is ready
+    setTimeout(() => {
+        window.ninetyNineNav = new NinetyNineNavigation();
+        console.log('Navigation system initialized');
+    }, 500);
 };

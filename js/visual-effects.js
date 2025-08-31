@@ -341,5 +341,16 @@ document.head.appendChild(visualStyle);
 
 // Initialize visual effects when main site loads
 window.initializeVisualEffects = function() {
-    window.visualEffects = new VisualEffects();
+    console.log('Starting visual effects initialization...');
+    
+    // Ensure DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.visualEffects = new VisualEffects();
+            console.log('Visual effects initialized after DOM ready');
+        });
+    } else {
+        window.visualEffects = new VisualEffects();
+        console.log('Visual effects initialized immediately');
+    }
 };

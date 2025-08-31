@@ -120,6 +120,8 @@ class NostalgicWebsite {
                 this.addScreenGlitch();
             }
         }, 1000);
+        
+        console.log('Random effects (sparkles and glitches) initialized');
     }
     
     createSparkle(x, y) {
@@ -224,42 +226,56 @@ class NostalgicWebsite {
 
 // Initialize main website when called from dialup
 window.initializeMainSite = function() {
+    console.log('Initializing main site...');
+    
     window.nostalgicSite = new NostalgicWebsite();
     
-    // Initialize navigation system
-    if (window.initializeNavigation) {
-        window.initializeNavigation();
-    }
-    
-    // Initialize desktop interface
-    if (window.initializeDesktop) {
-        window.initializeDesktop();
-    }
-    
-    // Initialize additional features
-    if (window.initializeFeatures) {
-        window.initializeFeatures();
-    }
-    
-    // Initialize visual effects
-    if (window.initializeVisualEffects) {
-        window.initializeVisualEffects();
-    }
-    
-    // Initialize guestbook
-    if (window.initializeGuestbook) {
-        window.initializeGuestbook();
-    }
-    
-    // Initialize chatroom
-    if (window.initializeChatroom) {
-        window.initializeChatroom();
-    }
-    
-    // Initialize easter eggs
-    if (window.initializeEasterEggs) {
-        window.initializeEasterEggs();
-    }
+    // Initialize all subsystems with proper timing
+    setTimeout(() => {
+        // Initialize visual effects first
+        if (window.initializeVisualEffects) {
+            console.log('Initializing visual effects...');
+            window.initializeVisualEffects();
+        }
+        
+        // Initialize additional features
+        if (window.initializeFeatures) {
+            console.log('Initializing features...');
+            window.initializeFeatures();
+        }
+        
+        // Initialize navigation system
+        if (window.initializeNavigation) {
+            console.log('Initializing navigation...');
+            window.initializeNavigation();
+        }
+        
+        // Initialize desktop interface
+        if (window.initializeDesktop) {
+            console.log('Initializing desktop...');
+            window.initializeDesktop();
+        }
+        
+        // Initialize guestbook
+        if (window.initializeGuestbook) {
+            console.log('Initializing guestbook...');
+            window.initializeGuestbook();
+        }
+        
+        // Initialize chatroom
+        if (window.initializeChatroom) {
+            console.log('Initializing chatroom...');
+            window.initializeChatroom();
+        }
+        
+        // Initialize easter eggs
+        if (window.initializeEasterEggs) {
+            console.log('Initializing easter eggs...');
+            window.initializeEasterEggs();
+        }
+        
+        console.log('Main site initialization complete!');
+    }, 100);
 }
 
 // Add sparkle animation CSS

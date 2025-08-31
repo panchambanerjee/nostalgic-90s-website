@@ -127,11 +127,25 @@ class DialupSimulator {
     }
     
     playModemSounds() {
-        // Create synthetic modem sounds using Web Audio API
-        this.createModemTones();
+        // First try to play the actual modem sound file
+        this.playActualModemSound();
         
-        // Also add some random static noise
+        // Also create synthetic modem sounds as backup
+        setTimeout(() => this.createModemTones(), 500);
+        
+        // Add some random static noise
         setTimeout(() => this.addStaticNoise(), 2000);
+    }
+    
+    playActualModemSound() {
+        const modemAudio = document.createElement('audio');
+        modemAudio.src = './sounds/dial-up-modem-01.mp3';
+        modemAudio.volume = 0.3;
+        modemAudio.preload = 'auto';
+        
+        modemAudio.play().catch(error => {
+            console.log('Could not play modem sound file, using synthetic sounds:', error);
+        });
     }
     
     createModemTones() {
