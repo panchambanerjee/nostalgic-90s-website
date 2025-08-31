@@ -212,6 +212,16 @@ class NostalgicWebsite {
 window.initializeMainSite = function() {
     window.nostalgicSite = new NostalgicWebsite();
     
+    // Initialize navigation system
+    if (window.initializeNavigation) {
+        window.initializeNavigation();
+    }
+    
+    // Initialize desktop interface
+    if (window.initializeDesktop) {
+        window.initializeDesktop();
+    }
+    
     // Initialize additional features
     if (window.initializeFeatures) {
         window.initializeFeatures();
@@ -230,6 +240,11 @@ window.initializeMainSite = function() {
     // Initialize chatroom
     if (window.initializeChatroom) {
         window.initializeChatroom();
+    }
+    
+    // Initialize easter eggs
+    if (window.initializeEasterEggs) {
+        window.initializeEasterEggs();
     }
 }
 
