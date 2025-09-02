@@ -1,0 +1,88 @@
+# Jekyll Configuration for Static Site
+# This configuration ensures Jekyll processes the site correctly for GitHub Pages
+
+# Site settings
+title: "CyberSpace 1999 - Tom from MySpace's Homepage"
+description: "A nostalgic journey back to the 90s web"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# Source and destination
+source: .
+destination: ./_site
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE.md
+  - SETUP.md
+  - .gitignore
+  - .git/
+  - .github/
+  - node_modules/
+  - vendor/
+  - docs/
+
+# Include files (ensure these are processed)
+include:
+  - .nojekyll
+
+# Disable auto-generation of pages
+auto_ids: false
+
+# Set baseurl (leave empty for root domain)
+baseurl: ""
+
+# Relative links
+relative_links:
+  enabled: true
+  collections: false
+
+# Front matter defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: none
+
+# Sass configuration (disable sass processing completely)
+sass:
+  style: compressed
+  sass_dir: _sass_disabled
+  load_paths: []
+
+# Disable SCSS processing by not including any SCSS files
+keep_files:
+  - css/
+  - js/
+  - images/
+  - sounds/
+  - gifs/
+
+# Collections (none needed for static site)
+collections: {}
+
+# Liquid options
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Kramdown configuration
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: false
+
+# Disable theme
+theme: null
+
+# Disable remote theme
+remote_theme: null
