@@ -1,6 +1,8 @@
 // Easter Eggs and Additional Features for 90s Website
 class EasterEggs {
     constructor() {
+        console.log('🚶 EasterEggs constructor starting...');
+        
         this.konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
         this.konamiInput = [];
         this.konamiUnlocked = false;
@@ -23,6 +25,9 @@ class EasterEggs {
         this.setupSecretPages();
         this.setupNostalgicGameReferences();
         this.setupHiddenFeatures();
+        
+        console.log('✅ EasterEggs constructor completed!');
+        console.log('🌈 Easter Eggs are now active and listening for input!');
     }
     
     initializeEasterEggs() {
@@ -37,14 +42,24 @@ class EasterEggs {
     }
     
     setupKonamiCode() {
+        console.log('🎮 Setting up Konami Code listener...');
+        
         document.addEventListener('keydown', (e) => {
+            console.log(`Key pressed: ${e.keyCode} (${e.key})`);
+            
             this.konamiInput.push(e.keyCode);
             this.konamiInput = this.konamiInput.slice(-this.konamiSequence.length);
             
+            console.log('Current input sequence:', this.konamiInput);
+            console.log('Target sequence:', this.konamiSequence);
+            
             if (JSON.stringify(this.konamiInput) === JSON.stringify(this.konamiSequence)) {
+                console.log('🎉 KONAMI CODE DETECTED!');
                 this.unlockKonamiSecrets();
             }
         });
+        
+        console.log('✅ Konami Code listener active!');
     }
     
     unlockKonamiSecrets() {
@@ -135,12 +150,17 @@ class EasterEggs {
     }
     
     setupCtrlAltDel() {
+        console.log('💻 Setting up Ctrl+Alt+Del listener...');
+        
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.altKey && e.key === 'Delete') {
+                console.log('📦 Ctrl+Alt+Del detected!');
                 e.preventDefault();
                 this.showTaskManager();
             }
         });
+        
+        console.log('✅ Ctrl+Alt+Del listener active!');
     }
     
     showTaskManager() {
@@ -971,11 +991,21 @@ document.head.appendChild(style);
 
 // Initialize Easter Eggs when main site loads
 window.initializeEasterEggs = function() {
-    window.easterEggs = new EasterEggs();
+    console.log('🥚 Initializing Easter Eggs...');
     
-    // Check if Konami was previously unlocked
-    if (localStorage.getItem('konamiUnlocked') === 'true') {
-        window.easterEggs.konamiUnlocked = true;
-        window.easterEggs.addSecretNav();
+    try {
+        window.easterEggs = new EasterEggs();
+        console.log('✅ Easter Eggs initialized successfully!');
+        console.log('🎮 Try the Konami Code: ↑↑↓↓←→←→BA');
+        console.log('💻 Try Ctrl+Alt+Del for task manager');
+        
+        // Check if Konami was previously unlocked
+        if (localStorage.getItem('konamiUnlocked') === 'true') {
+            window.easterEggs.konamiUnlocked = true;
+            window.easterEggs.addSecretNav();
+            console.log('🔓 Konami code was previously unlocked!');
+        }
+    } catch (error) {
+        console.error('❌ Failed to initialize Easter Eggs:', error);
     }
 };
