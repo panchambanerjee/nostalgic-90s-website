@@ -23,7 +23,7 @@ This project is a **pixel-perfect recreation** of what the internet felt like in
 
 ## 🚀 Live Demo
 
-**[🌐 Enter CyberSpace →](https://panchambanerjee.github.io/nostalgic-90s-web/)**
+**[🌐 Enter CyberSpace →](https://panchambanerjee.github.io/nostalgic-90s-website/)**
 
 *Best viewed on Netscape Navigator 4.0 at 800x600 resolution* 😉
 
