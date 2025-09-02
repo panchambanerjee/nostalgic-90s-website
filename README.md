@@ -42,11 +42,9 @@ This project is a **pixel-perfect recreation** of what the internet felt like in
 - **90s Chatroom** - Chat with AI bots representing 1999 internet users
 - **Photo Gallery** - Digital camera simulation with authentic 90s specs
 - **Download Center** - Browse and "download" authentic 90s shareware
-- **WebRing Navigation** - Explore themed website rings
 - **Visitor Counter** - Digital LED-style hit counter with rolling animations
 
-### 🕹️ **Easter Eggs & Secrets**
-- **Konami Code** - Unlock Matrix mode and secret features
+### 🕹️ **Additional Features**
 - **Task Manager** - Ctrl+Alt+Del for Windows 98-style process viewer
 - **Weather Widget** - Y2K-era weather information
 - **Stock Ticker** - 1999 tech stock prices
@@ -145,8 +143,6 @@ open http://localhost:8000
 5. **Browse downloads** - Check out the authentic shareware collection
 
 ### **Hidden Features**
-- **Konami Code** (↑↑↓↓←→←→BA) for Matrix mode and secret content
-- **Ctrl+Alt+Del** to access the Windows 98-style task manager
 - **Music Player** - Click play to enjoy procedural MIDI-style tracks
 - **Popup Ads** - Experience authentic 90s popup chaos (they auto-close!)
 
@@ -267,7 +263,7 @@ If this project brought back memories of the good old days when the web was weir
 
 - **Lines of Code**: 15,000+ (all written with 90s passion)
 - **JavaScript Files**: 15 modular components
-- **Easter Eggs**: 10+ hidden features and interactions
+- **Interactive Features**: 10+ engaging user experiences
 - **CSS Animations**: Authentic 90s visual effects without actual GIFs
 - **Authenticity Level**: Certified Y2K Ready! ✅
 - **Web Audio**: Procedural modem sounds and MIDI-style music
