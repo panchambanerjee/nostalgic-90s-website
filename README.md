@@ -6,7 +6,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 [![Y2K Ready](https://img.shields.io/badge/Y2K-Ready%20%F0%9F%9A%80-00ff00)](https://en.wikipedia.org/wiki/Year_2000_problem)
 
-> **Welcome to CyberSpace 1999!** 🚀 A lovingly crafted tribute to the golden age of the internet, complete with dial-up sounds, dancing babies, and enough neon colors to make your retinas burn with nostalgia! 
+> **Welcome to CyberSpace 1999!** 🚀 A lovingly crafted tribute to the golden age of the internet by Tom from MySpace, complete with dial-up sounds, dancing babies, and enough neon colors to make your retinas burn with nostalgia! 
 
 ## 🎯 What Is This Madness?
 
@@ -30,55 +30,53 @@ This project is a **pixel-perfect recreation** of what the internet felt like in
 ## ✨ Features That'll Blow Your Mind (Like It's 1999)
 
 ### 🎭 **Authentic 90s Experience**
-- **Dial-up connection simulation** with realistic modem sounds
+- **Dial-up connection simulation** with realistic procedural modem sounds
 - **Table-based layouts** with classic HTML styling
-- **Animated GIFs** including dancing babies and under construction signs
+- **Animated CSS effects** simulating classic animated GIFs
 - **Marquee text** that scrolls with pride
-- **Blink tags** (yes, they're back!)
-- **MIDI-style background music** with multiple tracks
+- **Retro color schemes** and nostalgic fonts
+- **Procedural MIDI-style music** with 6 different tracks
 
 ### 🎮 **Interactive Features**
-- **Virtual Pet Care** - Raise your own CyberPet with evolution stages
-- **90s Chatroom** - Chat with AI bots from 1999
-- **Photo Gallery** - Digital camera simulation with film roll loading
-- **Download Center** - Experience authentic shareware downloads
-- **WebRing Navigation** - Surf the ring like it's 1999
-- **Guestbook** - Sign and leave messages for other visitors
+- **Virtual Pet Care** - Raise your own CyberPet with evolution stages and stats
+- **90s Chatroom** - Chat with AI bots representing 1999 internet users
+- **Photo Gallery** - Digital camera simulation with authentic 90s specs
+- **Download Center** - Browse and "download" authentic 90s shareware
+- **WebRing Navigation** - Explore themed website rings
+- **Visitor Counter** - Digital LED-style hit counter with rolling animations
 
 ### 🕹️ **Easter Eggs & Secrets**
-- **Konami Code** - Unlock the Matrix mode
-- **Secret Pages** - Type "matrix", "secret", or "games" anywhere
-- **Hidden Games** - Snake, Pong, Tetris, and Space Invaders
-- **Admin Panel** - Type "admin" for secret access
-- **Keyboard Shortcuts** - Ctrl+Alt+Del for task manager
-- **Color Modes** - Psychedelic and rainbow effects
+- **Konami Code** - Unlock Matrix mode and secret features
+- **Task Manager** - Ctrl+Alt+Del for Windows 98-style process viewer
+- **Weather Widget** - Y2K-era weather information
+- **Stock Ticker** - 1999 tech stock prices
+- **Popup Blocker Counter** - Track those annoying 90s popups
 
 ### ♿ **Modern Accessibility**
-- **Keyboard navigation** with visual focus indicators
-- **Screen reader support** with proper ARIA labels
-- **High contrast mode** toggle
-- **Text size controls** for better readability
-- **Reduced motion** option for sensitive users
-- **Performance optimization** for slower devices
+- **Keyboard navigation** with visual focus indicators (implemented via navigation.js)
+- **Screen reader support** with semantic HTML structure
+- **Performance optimization** for various devices
+- **Responsive design** while maintaining 90s aesthetics
 
 ## 🛠️ Technical Magic Behind The Scenes
 
 ### **Pure HTML/CSS/JavaScript**
 - No frameworks, no build process - just authentic web technologies
-- Vanilla JavaScript with ES6+ features
+- Vanilla JavaScript with ES6+ features for modern functionality
 - CSS animations and transforms for visual effects
-- LocalStorage for persistent data (guestbook, pet care, preferences)
+- LocalStorage for persistent data (hit counter, pet care, user preferences)
+- Web Audio API for procedural modem sounds and music generation
 
 ### **Performance Optimized**
-- Lazy loading for heavy content
-- Animation throttling for smooth performance
-- Automatic performance mode on slower devices
 - Efficient event handling and memory management
+- CSS-based animations instead of resource-heavy GIFs
+- Modular JavaScript architecture with class-based components
+- Lazy initialization of complex features
 
 ### **Browser Compatibility**
 - Works on all modern browsers (Chrome, Firefox, Safari, Edge)
-- Graceful degradation for older browsers
-- Mobile-responsive while maintaining 90s aesthetics
+- Graceful degradation for audio features
+- Mobile-responsive while maintaining 90s table-based layout authenticity
 
 ## 📁 Project Structure
 
@@ -111,15 +109,15 @@ nostalgic-90s-web/
 ### **Option 1: GitHub Pages (Recommended)**
 1. **Fork this repository**
 2. **Enable GitHub Pages** in repository settings
-3. **Visit your deployed site** at `https://yourusername.github.io/nostalgic-90s-web/`
+3. **Visit your deployed site** at `https://yourusername.github.io/nostalgic-90s-website/`
 
 ### **Option 2: Local Development**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/nostalgic-90s-web.git
+git clone https://github.com/panchambanerjee/nostalgic-90s-website.git
 
 # Navigate to project directory
-cd nostalgic-90s-web
+cd nostalgic-90s-website
 
 # Serve locally (Python example)
 python -m http.server 8000
@@ -140,32 +138,26 @@ open http://localhost:8000
 ## 🎮 How to Use
 
 ### **Getting Started**
-1. **Connect to CyberSpace** - Click the dial-up connection button
-2. **Explore the site** - Use the navigation menu on the left
-3. **Care for your pet** - Click the virtual pet to open the care window
-4. **Sign the guestbook** - Leave a message for other visitors
-5. **Download software** - Visit the download center for authentic shareware
+1. **Connect to CyberSpace** - Click the dial-up connection button and enjoy the modem sounds
+2. **Explore the site** - Use the navigation menu on the left to browse different sections
+3. **Care for your virtual pet** - Click the virtual pet to open the care window
+4. **Visit the chatroom** - Join the 90s-style chat with AI bots
+5. **Browse downloads** - Check out the authentic shareware collection
 
 ### **Hidden Features**
-- **Type "matrix"** anywhere to enter The Matrix
-- **Type "secret"** to access the secret area
-- **Type "games"** to open the retro arcade
-- **Press F1** for keyboard navigation help
-- **Use Konami Code** (↑↑↓↓←→←→BA) for ultimate secrets
-
-### **Accessibility Features**
-- **Click the ♿ button** (top-left) for accessibility options
-- **Use Tab/Shift+Tab** to navigate with keyboard
-- **Press F1** for complete keyboard shortcuts
-- **Toggle high contrast** for better visibility
+- **Konami Code** (↑↑↓↓←→←→BA) for Matrix mode and secret content
+- **Ctrl+Alt+Del** to access the Windows 98-style task manager
+- **Music Player** - Click play to enjoy procedural MIDI-style tracks
+- **Popup Ads** - Experience authentic 90s popup chaos (they auto-close!)
 
 ## 🎨 Customization
 
 ### **Adding Your Own Content**
-1. **Edit the About Me section** in `js/navigation.js`
+1. **Edit the About Me section** in `js/navigation.js` (getAboutContent function)
 2. **Add your photos** to the gallery in `js/photo-gallery.js`
-3. **Customize the pet** in `js/virtual-pet.js`
-4. **Add your links** in the Cool Links section
+3. **Customize the virtual pet** settings in `js/virtual-pet.js`
+4. **Add your links** in the Cool Links section of `js/navigation.js`
+5. **Modify popup ads** in `js/popup-ads.js` for custom messages
 
 ### **Styling Changes**
 - **Main styles**: Edit `css/main.css`
@@ -174,9 +166,10 @@ open http://localhost:8000
 - **Layout**: Adjust table structures in `index.html`
 
 ### **Adding Features**
-- **New pages**: Add cases to `navigation.js`
-- **Easter eggs**: Extend `easter-eggs.js`
-- **Interactive elements**: Follow existing patterns
+- **New pages**: Add cases to the `navigateToPage` function in `navigation.js`
+- **Easter eggs**: Extend functionality in `easter-eggs.js`
+- **Interactive elements**: Follow the modular class-based patterns used throughout
+- **Audio features**: Use the Web Audio API patterns in `dialup.js` and `main.js`
 
 ## 🧪 Browser Testing
 
@@ -189,10 +182,11 @@ Tested and working on:
 
 ## 🐛 Known Issues & Quirks
 
-- **Audio context** requires user interaction on some browsers
-- **Animations** may be reduced on mobile devices for performance
-- **Right-click protection** is intentionally cheesy (it's a feature!)
-- **Y2K countdown** will show as "expired" (historically accurate!)
+- **Audio context** requires user interaction on some browsers (click Connect to enable sounds)
+- **Procedural audio** may vary slightly between browsers due to Web Audio API differences
+- **Mobile experience** maintains 90s table layouts but may require horizontal scrolling
+- **Popup ads** are intentionally chaotic (it's a feature, not a bug!)
+- **Some features** are still in development - this is a living tribute to 90s web culture
 
 ## 🤝 Contributing
 
@@ -261,7 +255,7 @@ If this project brought back memories of the good old days when the web was weir
 
 ### 🎉 Welcome to the Information Superhighway! 🎉
 
-**Made with 💖 and excessive amounts of ✨ by CyberKids for CyberKids**
+**Made with 💖 and excessive amounts of ✨ by Tom from MySpace for CyberKids everywhere**
 
 *Best viewed with rose-colored glasses and a sense of humor*
 
@@ -271,11 +265,13 @@ If this project brought back memories of the good old days when the web was weir
 
 ## 📊 Project Stats
 
-- **Lines of Code**: 5000+ (all written with love)
-- **Easter Eggs**: 15+ hidden features
-- **Animated GIFs**: Unlimited nostalgia
-- **Authenticity Level**: Over 9000! 🔥
-- **Y2K Compliance**: Absolutely ready! ✅
+- **Lines of Code**: 15,000+ (all written with 90s passion)
+- **JavaScript Files**: 15 modular components
+- **Easter Eggs**: 10+ hidden features and interactions
+- **CSS Animations**: Authentic 90s visual effects without actual GIFs
+- **Authenticity Level**: Certified Y2K Ready! ✅
+- **Web Audio**: Procedural modem sounds and MIDI-style music
+- **Interactivity**: Virtual pet, chatroom, download center, and more!
 
 **Copyright © 1999-2024 • CyberSpace Web Technologies • All Rights Reserved**
 
